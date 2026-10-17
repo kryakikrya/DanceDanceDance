@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CheckCombination
@@ -13,6 +14,9 @@ public class CheckCombination
    private Obstacle _previousObstacle;
    
    private float CurrentTime => _songClock.SongTime;
+
+   public event Action<Obstacle> OnObstacleCreated;
+   public event Action<Obstacle> OnObstacleDestroyed;
 
    public CheckCombination(SongClock clock, ObstacleGeneration generation, float timeBefore, float timeAfter)
    {
@@ -33,6 +37,8 @@ public class CheckCombination
       _previousObstacle = _currentObstacle;
       
       _currentObstacle = newObstacle;
+      
+      OnObstacleCreated?.Invoke(newObstacle);
    }
 
    public CheckResultType Check(DanceState topState, DanceState bottomState)
@@ -45,14 +51,14 @@ public class CheckCombination
          {
             if (_previousObstacle.BottomState == bottomState && _previousObstacle.TopState == topState)
             {
-               return CheckResultType.PerfectTime;  
+               return FinalizeCheck(_previousObstacle,  CheckResultType.PerfectTime);
             }
             
             Debug.Log($"Input {topState} + {bottomState}. It was {_previousObstacle.TopState} - {_previousObstacle.BottomState}");
-            return CheckResultType.WrongCombination;
+            return FinalizeCheck(_previousObstacle,  CheckResultType.WrongCombination);
          }
 
-         return CheckResultType.TooLate;
+         return FinalizeCheck(_previousObstacle,  CheckResultType.TooLate);
       }
       else
       {
@@ -60,14 +66,20 @@ public class CheckCombination
          {
             if (_currentObstacle.BottomState == bottomState && _currentObstacle.TopState == topState)
             {
-               return CheckResultType.PerfectTime;  
+               return FinalizeCheck(_currentObstacle,  CheckResultType.PerfectTime);
             }
             
             Debug.Log($"Input {topState} + {bottomState}. It was {_currentObstacle.TopState} - {_currentObstacle.BottomState}");
-            return CheckResultType.WrongCombination;
+            return FinalizeCheck(_currentObstacle,  CheckResultType.WrongCombination);
          }
 
-         return CheckResultType.TooEarly;  
+         return FinalizeCheck(_currentObstacle,  CheckResultType.TooEarly);
       }
+   }
+
+   public CheckResultType FinalizeCheck(Obstacle obstacle, CheckResultType type)
+   {
+      OnObstacleDestroyed?.Invoke(obstacle);
+      return type;
    }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ScoreSystem
@@ -8,13 +9,16 @@ public class ScoreSystem
     
     public float Score => _score;
     
-    private ScoreSystemSettingsSO _settings;
+    private CombinationSettingsSO _settings;
+    
+    public event Action<CheckResultType> OnCheckResult;
+    public event Action<float> OnScoreChanged;
 
-    public ScoreSystem(ScoreSystemSettingsSO settings)
+    public ScoreSystem(CombinationSettingsSO settings)
     {
         _settings = settings;
     }
-
+    
     public void AddScore(CheckResultType result)
     {
         switch (result)
@@ -27,21 +31,18 @@ public class ScoreSystem
             case CheckResultType.TooEarly:
                 Debug.Log("Early");
                 _combination = 0;
-                _score -= _settings.TooEarlyTax;
-                _score = Mathf.Clamp(_score, 0, float.MaxValue);
                 break;
             case CheckResultType.TooLate:
                 Debug.Log("Late");
                 _combination = 0;
-                _score -= _settings.TooLateTax;
-                _score = Mathf.Clamp(_score, 0, float.MaxValue);
                 break;
             case CheckResultType.WrongCombination:
                 Debug.Log("Wrong Combination");
                 _combination = 0;
-                _score -= _settings.WrongCombinationTax;
-                _score = Mathf.Clamp(_score, 0, float.MaxValue);
                 break;
         }
+        
+        OnCheckResult?.Invoke(result);
+        OnScoreChanged?.Invoke(_score);
     }
 }

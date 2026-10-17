@@ -11,23 +11,27 @@ public class GameEntryPoint : IDisposable
     
     private SongClock _songClock;
     
-    private ScoreSystemSettingsSO _scoreSystemSettingsSo;
+    private CombinationSettingsSO _combinationSettingsSo;
 
     private PlayerActions _actions;
     
     private float _timeBefore;
     private float _timeAfter;
+
+    private int _maxHealth;
     
-    public GameEntryPoint(List<AudioSource> sources, SongClock clock, ScoreSystemSettingsSO settings, float timeBefore, float timeAfter)
+    public GameEntryPoint(List<AudioSource> sources, SongClock clock, CombinationSettingsSO settings, float timeBefore, float timeAfter, int maxHealth)
     {
         _audioSources = sources;
         
         _songClock = clock;
         
-        _scoreSystemSettingsSo = settings;
+        _combinationSettingsSo = settings;
         
         _timeBefore = timeBefore;
         _timeAfter = timeAfter;
+        
+        _maxHealth = maxHealth;
     }
 
     public void StartServices(
@@ -36,7 +40,8 @@ public class GameEntryPoint : IDisposable
         out ObstacleGeneration obstacleGeneration,
         out PlayerActions playerActions,
         out ScoreSystem scoreSystem,
-        out CheckCombination checkCombination
+        out CheckCombination checkCombination,
+        out HealthSystem healthSystem
         )
     {
         ResourceLoader loader = new ResourceLoader();
@@ -44,8 +49,9 @@ public class GameEntryPoint : IDisposable
         soundSystem = new SoundSystem(_audioSources, contentManagementSystem);
         obstacleGeneration = new ObstacleGeneration(_songClock);
         playerActions = new PlayerActions();
-        scoreSystem = new ScoreSystem(_scoreSystemSettingsSo);
+        scoreSystem = new ScoreSystem(_combinationSettingsSo);
         checkCombination = new CheckCombination(_songClock, obstacleGeneration, _timeBefore, _timeAfter);
+        healthSystem = new HealthSystem(_maxHealth, _combinationSettingsSo);
     }
 
     public void StartGame(

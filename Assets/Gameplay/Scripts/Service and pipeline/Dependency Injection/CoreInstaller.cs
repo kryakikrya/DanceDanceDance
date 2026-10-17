@@ -6,12 +6,16 @@ public class CoreInstaller : MonoInstaller
 {
     [Header("Services")]
     [SerializeField] private SongClock _clock;
-    [SerializeField] private ScoreSystemSettingsSO _scoreSystemSettings;
+    [SerializeField] private CombinationSettingsSO combinationSettings;
     
     [Header("Sound System")]
     [SerializeField] private List<AudioSource> _audioSources;
     [SerializeField] private AudioClip _startSong;
     [SerializeField] private SongSO _startSongSO;
+    
+    [Header("Player Settings")]
+    
+    [SerializeField] private int _maxHealth;
     
     [Header("Valid time before and after obstacle")]
     // Аккуратно! Короче если там before и after двух обстаклов друг на друга наложатся, то плохо может быть, так что значения в идеале не слишком большие
@@ -23,7 +27,7 @@ public class CoreInstaller : MonoInstaller
     // ReSharper disable Unity.PerformanceAnalysis
     public override void InstallBindings()
     {
-        GameEntryPoint gameEntryPoint = new GameEntryPoint(_audioSources, _clock, _scoreSystemSettings, _timeBefore, _timeAfter);
+        GameEntryPoint gameEntryPoint = new GameEntryPoint(_audioSources, _clock, combinationSettings, _timeBefore, _timeAfter, _maxHealth);
         
         gameEntryPoint.StartServices(
             out CMS contentManagementSystem, 
@@ -31,7 +35,8 @@ public class CoreInstaller : MonoInstaller
             out ObstacleGeneration generation,
             out PlayerActions playerActions,
             out ScoreSystem scoreSystem,
-            out CheckCombination checkCombination);
+            out CheckCombination checkCombination,
+            out HealthSystem healthSystem);
         
         Container.Bind<CMS>().FromInstance(contentManagementSystem).AsSingle();
         Container.Bind<SongClock>().FromInstance(_clock).AsSingle();
@@ -40,6 +45,7 @@ public class CoreInstaller : MonoInstaller
         Container.Bind<PlayerActions>().FromInstance(playerActions).AsSingle();
         Container.Bind<ScoreSystem>().FromInstance(scoreSystem).AsSingle();
         Container.Bind<CheckCombination>().FromInstance(checkCombination).AsSingle();
+        Container.Bind<HealthSystem>().FromInstance(healthSystem).AsSingle();
         
         gameEntryPoint.StartGame(
             soundSystem, 
