@@ -10,7 +10,7 @@ public class ScoreSystem
     
     private ScoreSystemSettingsSO _settings;
 
-    private ScoreSystem(ScoreSystemSettingsSO settings)
+    public ScoreSystem(ScoreSystemSettingsSO settings)
     {
         _settings = settings;
     }
@@ -20,20 +20,24 @@ public class ScoreSystem
         switch (result)
         {
             case CheckResultType.PerfectTime:
+                Debug.Log("Perfect");
                 _combination++;
-                _score += _settings.PerfectBonus * (_settings.CombinationModifier * _combination);
+                _score += _settings.PerfectBonus * (1 + (_settings.CombinationModifier * _combination));
                 break;
             case CheckResultType.TooEarly:
+                Debug.Log("Early");
                 _combination = 0;
                 _score -= _settings.TooEarlyTax;
                 _score = Mathf.Clamp(_score, 0, float.MaxValue);
                 break;
             case CheckResultType.TooLate:
+                Debug.Log("Late");
                 _combination = 0;
                 _score -= _settings.TooLateTax;
                 _score = Mathf.Clamp(_score, 0, float.MaxValue);
                 break;
             case CheckResultType.WrongCombination:
+                Debug.Log("Wrong Combination");
                 _combination = 0;
                 _score -= _settings.WrongCombinationTax;
                 _score = Mathf.Clamp(_score, 0, float.MaxValue);

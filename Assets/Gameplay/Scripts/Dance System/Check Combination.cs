@@ -14,10 +14,12 @@ public class CheckCombination
    
    private float CurrentTime => _songClock.SongTime;
 
-   public CheckCombination(SongClock clock, ObstacleGeneration generation, float obstacleTime, float timeBefore, float timeAfter)
+   public CheckCombination(SongClock clock, ObstacleGeneration generation, float timeBefore, float timeAfter)
    {
       _timeBefore = timeBefore;
       _timeAfter = timeAfter;
+      
+      Debug.Log($"Checker has been initialized. {_timeBefore} - {_timeAfter}");
       
       _generation = generation;
 
@@ -35,7 +37,9 @@ public class CheckCombination
 
    public CheckResultType Check(DanceState topState, DanceState bottomState)
    {
-      if (Mathf.Abs(CurrentTime - _previousObstacle.Time) > Mathf.Abs(CurrentTime - _currentObstacle.Time))
+      Debug.Log($"{CurrentTime} времени сейчас. {_previousObstacle.Time} - prev, {_currentObstacle.Time} - cur");
+      
+      if (Mathf.Abs(CurrentTime - _previousObstacle.Time) < Mathf.Abs(CurrentTime - _currentObstacle.Time))
       {
          if (CurrentTime < _previousObstacle.Time + _timeAfter)
          {
@@ -44,24 +48,26 @@ public class CheckCombination
                return CheckResultType.PerfectTime;  
             }
             
+            Debug.Log($"Input {topState} + {bottomState}. It was {_previousObstacle.TopState} - {_previousObstacle.BottomState}");
             return CheckResultType.WrongCombination;
          }
 
          return CheckResultType.TooLate;
       }
-
-      if (CurrentTime > _currentObstacle.Time - _timeBefore)
+      else
       {
-         if (_currentObstacle.BottomState == bottomState && _currentObstacle.TopState == topState)
+         if (CurrentTime > _currentObstacle.Time - _timeBefore)
          {
-            return CheckResultType.PerfectTime;  
-         }
+            if (_currentObstacle.BottomState == bottomState && _currentObstacle.TopState == topState)
+            {
+               return CheckResultType.PerfectTime;  
+            }
             
-         return CheckResultType.WrongCombination;
+            Debug.Log($"Input {topState} + {bottomState}. It was {_currentObstacle.TopState} - {_currentObstacle.BottomState}");
+            return CheckResultType.WrongCombination;
+         }
+
+         return CheckResultType.TooEarly;  
       }
-
-      return CheckResultType.TooEarly;
-
-      return CheckResultType.WrongCombination;
    }
 }

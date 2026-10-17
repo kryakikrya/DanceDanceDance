@@ -150,6 +150,7 @@ Transform:
   m_Children:
   - {fileID: 997980560}
   - {fileID: 777521148}
+  - {fileID: 852117985}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &224355036
@@ -757,6 +758,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c90dc07af5429b4899b4fda9bc76e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SongClock
+--- !u!1 &852117984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 852117985}
+  - component: {fileID: 852117986}
+  m_Layer: 0
+  m_Name: Dance Confirm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &852117985
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852117984}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2891705}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &852117986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852117984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81252d1c67e35f5d4a330f10db3948ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DanceConfirm
+  _top: {fileID: 2077215419}
+  _bottom: {fileID: 589789958}
 --- !u!1 &928377514
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,7 +1006,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.48506323
+  m_Volume: 0.8832435
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1088,6 +1135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoreInstaller
   _clock: {fileID: 777521149}
+  _scoreSystemSettings: {fileID: 11400000, guid: e025eeb24c4bcaab68f4f23ca63ad1af, type: 2}
   _audioSources:
   - {fileID: 1268288717}
   - {fileID: 1127323318}
@@ -1097,6 +1145,8 @@ MonoBehaviour:
   - {fileID: 1868115121}
   _startSong: {fileID: 8300000, guid: a95b353473adb80268c3e47f784c7fe6, type: 3}
   _startSongSO: {fileID: 11400000, guid: a779e5c6cd13ee83d97d31346832e9e3, type: 2}
+  _timeBefore: 0.2
+  _timeAfter: 0.2
 --- !u!1 &1268288715
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,7 +1192,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5149368
+  m_Volume: 0.1167565
   m_Pitch: 1
   Loop: 0
   Mute: 0

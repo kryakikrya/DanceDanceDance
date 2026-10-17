@@ -10,13 +10,16 @@ public class DanceConfirm : MonoBehaviour
     
     private PlayerActions _playerActions;
     private CheckCombination _checker;
+    private ScoreSystem _scoreSystem;
     
     [Inject]
-    private void Construct(PlayerActions playerActions, CheckCombination checker)
+    private void Construct(PlayerActions playerActions, CheckCombination checker, ScoreSystem scoreSystem)
     {
         _playerActions = playerActions;
         
         _checker = checker;
+        
+        _scoreSystem = scoreSystem;
     }
 
     private void OnEnable()
@@ -31,6 +34,8 @@ public class DanceConfirm : MonoBehaviour
     
     private void OnConfirm(InputAction.CallbackContext context)
     {
-        _checker.Check(_top.CurrentState, _bottom.CurrentState);
+        Debug.Log($"Confirm top {_top.gameObject.name} is {_top.CurrentState}, bot {_bottom.gameObject.name} is {_bottom.CurrentState}");
+        
+        _scoreSystem.AddScore(_checker.Check(_top.CurrentState, _bottom.CurrentState));
     }
 }

@@ -11,18 +11,32 @@ public class GameEntryPoint : IDisposable
     
     private SongClock _songClock;
     
-    public GameEntryPoint(List<AudioSource> sources, SongClock clock)
+    private ScoreSystemSettingsSO _scoreSystemSettingsSo;
+
+    private PlayerActions _actions;
+    
+    private float _timeBefore;
+    private float _timeAfter;
+    
+    public GameEntryPoint(List<AudioSource> sources, SongClock clock, ScoreSystemSettingsSO settings, float timeBefore, float timeAfter)
     {
         _audioSources = sources;
         
         _songClock = clock;
+        
+        _scoreSystemSettingsSo = settings;
+        
+        _timeBefore = timeBefore;
+        _timeAfter = timeAfter;
     }
 
     public void StartServices(
         out CMS contentManagementSystem,
         out SoundSystem soundSystem,
         out ObstacleGeneration obstacleGeneration,
-        out PlayerActions playerActions
+        out PlayerActions playerActions,
+        out ScoreSystem scoreSystem,
+        out CheckCombination checkCombination
         )
     {
         ResourceLoader loader = new ResourceLoader();
@@ -30,6 +44,8 @@ public class GameEntryPoint : IDisposable
         soundSystem = new SoundSystem(_audioSources, contentManagementSystem);
         obstacleGeneration = new ObstacleGeneration(_songClock);
         playerActions = new PlayerActions();
+        scoreSystem = new ScoreSystem(_scoreSystemSettingsSo);
+        checkCombination = new CheckCombination(_songClock, obstacleGeneration, _timeBefore, _timeAfter);
     }
 
     public void StartGame(
@@ -50,9 +66,10 @@ public class GameEntryPoint : IDisposable
         
         soundSystem.PlayMusic(startSong).Forget();
     }
-
+    
     public void Dispose()
     {
         _audioSources = null;
+        _playerActions.Dispose();
     }
 }

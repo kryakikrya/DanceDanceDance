@@ -6,28 +6,40 @@ public class CoreInstaller : MonoInstaller
 {
     [Header("Services")]
     [SerializeField] private SongClock _clock;
+    [SerializeField] private ScoreSystemSettingsSO _scoreSystemSettings;
     
     [Header("Sound System")]
     [SerializeField] private List<AudioSource> _audioSources;
     [SerializeField] private AudioClip _startSong;
     [SerializeField] private SongSO _startSongSO;
     
+    [Header("Valid time before and after obstacle")]
+    // Аккуратно! Короче если там before и after двух обстаклов друг на друга наложатся, то плохо может быть, так что значения в идеале не слишком большие
+    // По идее сработает только Previous, а второй останется, но в любом случае не стоит
+    [SerializeField] private float _timeBefore;
+
+    [SerializeField] private float _timeAfter;
+    
     // ReSharper disable Unity.PerformanceAnalysis
     public override void InstallBindings()
     {
-        GameEntryPoint gameEntryPoint = new GameEntryPoint(_audioSources, _clock);
+        GameEntryPoint gameEntryPoint = new GameEntryPoint(_audioSources, _clock, _scoreSystemSettings, _timeBefore, _timeAfter);
         
         gameEntryPoint.StartServices(
             out CMS contentManagementSystem, 
             out SoundSystem soundSystem,
             out ObstacleGeneration generation,
-            out PlayerActions playerActions);
+            out PlayerActions playerActions,
+            out ScoreSystem scoreSystem,
+            out CheckCombination checkCombination);
         
         Container.Bind<CMS>().FromInstance(contentManagementSystem).AsSingle();
         Container.Bind<SongClock>().FromInstance(_clock).AsSingle();
         Container.Bind<SoundSystem>().FromInstance(soundSystem).AsSingle();
         Container.Bind<ObstacleGeneration>().FromInstance(generation).AsSingle();
         Container.Bind<PlayerActions>().FromInstance(playerActions).AsSingle();
+        Container.Bind<ScoreSystem>().FromInstance(scoreSystem).AsSingle();
+        Container.Bind<CheckCombination>().FromInstance(checkCombination).AsSingle();
         
         gameEntryPoint.StartGame(
             soundSystem, 

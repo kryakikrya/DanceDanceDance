@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class ObstacleGeneration
@@ -87,6 +88,8 @@ public class ObstacleGeneration
             (int)DanceState.BottomState1,
             (int)DanceState.BottomState3 + 1
         );
+        
+        Debug.Log($"Current Combination {topState} {bottomState}");
 
         OnPoseChanged?.Invoke(new Obstacle(index, topState, bottomState, time));
     }

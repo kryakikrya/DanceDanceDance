@@ -15,6 +15,7 @@ public class SongClock : MonoBehaviour
         if (_isPlaying)
         {
             _songTimer += Time.deltaTime;
+            Debug.Log(_songTimer);
         }
     }
 

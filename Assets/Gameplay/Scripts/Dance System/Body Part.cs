@@ -33,15 +33,8 @@ public class BodyPart : MonoBehaviour
             var action = _playerActions.asset.FindAction($"{reference.actionMap.name}/{reference.name}", true);
             
             var state = binding.StateData;
-            
-            Debug.Log(
-                $"[INPUT BIND] {name} | Action: {action.actionMap.name}/{action.name} | " +
-                $"Bindings: {action.GetBindingDisplayString()} | State: {state}"
-            );
 
             Action<InputAction.CallbackContext> callback = _ => ChangeState(state);
-            
-            Debug.Log($"Action: {action.name} | Enabled: {action.enabled}");
 
             action.performed += callback;
             _subscriptions.Add((action, callback));
@@ -60,7 +53,7 @@ public class BodyPart : MonoBehaviour
 
     private void ChangeState(StateDataSO state)
     {
-        Debug.Log($"Changing state to {state}");
+        Debug.Log($"Changing state to {state.State}");
         
         _currentState = state.State;
 
