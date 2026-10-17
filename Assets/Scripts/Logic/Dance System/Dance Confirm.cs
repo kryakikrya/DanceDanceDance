@@ -5,8 +5,8 @@ using Zenject;
 
 public class DanceConfirm : MonoBehaviour
 {
-    [SerializeField] private BodyPart _top;
-    [SerializeField] private BodyPart _bottom;
+    [SerializeField] private SubsciptedBodyPart _top;
+    [SerializeField] private SubsciptedBodyPart _bottom;
     
     private PlayerActions _playerActions;
     private CheckCombination _checker;
