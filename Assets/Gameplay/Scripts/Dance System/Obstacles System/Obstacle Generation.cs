@@ -1,7 +1,6 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class ObstacleGeneration
@@ -13,7 +12,7 @@ public class ObstacleGeneration
 
     private int[] _obstacles;
 
-    public event Action<(DanceState top, DanceState bottom)> CurrentPose;
+    public event Action<Obstacle> OnPoseChanged;
 
     private SongClock _clock;
 
@@ -35,7 +34,7 @@ public class ObstacleGeneration
     {
         int index = 0;
 
-        RandomPose();
+        RandomPose(index, GetTimeOfBeat(index));
 
         try
         {
@@ -58,11 +57,11 @@ public class ObstacleGeneration
                     cancellationToken: _cts.Token
                 );
 
-                if (index < _obstacles.Length && _clock.HasReached(_obstacles[index] * _timeForOneBeat))
+                if (index < _obstacles.Length && _clock.HasReached(GetTimeOfBeat(index)))
                 {
                     //Debug.Log($"SongTime {_clock.SongTime}");
                     index++;
-                    RandomPose();
+                    RandomPose(index, GetTimeOfBeat(index));
                 }
             }
         }
@@ -72,7 +71,12 @@ public class ObstacleGeneration
         }
     }
 
-    private void RandomPose()
+    public float GetTimeOfBeat(int index)
+    {
+        return _obstacles[index] * _timeForOneBeat;
+    }
+
+    private void RandomPose(int index, float time)
     {
         DanceState topState = (DanceState)Random.Range(
             (int)DanceState.TopState1,
@@ -84,6 +88,6 @@ public class ObstacleGeneration
             (int)DanceState.BottomState3 + 1
         );
 
-        CurrentPose?.Invoke((topState, bottomState));
+        OnPoseChanged?.Invoke(new Obstacle(index, topState, bottomState, time));
     }
 }

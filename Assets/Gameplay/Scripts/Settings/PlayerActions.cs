@@ -151,6 +151,16 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""initialStateCheck"": false,
                     ""priority"": 0
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""e40b38bd-99eb-49b3-be91-cfce9d756bbe"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
                 }
             ],
             ""bindings"": [
@@ -219,6 +229,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""BottomMove3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e73d733f-69e7-4107-8e2b-9aa19cd4fb41"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -233,6 +254,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_MainMap_BottomMove1 = m_MainMap.FindAction("BottomMove1", throwIfNotFound: true);
         m_MainMap_BottomMove2 = m_MainMap.FindAction("BottomMove2", throwIfNotFound: true);
         m_MainMap_BottomMove3 = m_MainMap.FindAction("BottomMove3", throwIfNotFound: true);
+        m_MainMap_Confirm = m_MainMap.FindAction("Confirm", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -319,6 +341,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_MainMap_BottomMove1;
     private readonly InputAction m_MainMap_BottomMove2;
     private readonly InputAction m_MainMap_BottomMove3;
+    private readonly InputAction m_MainMap_Confirm;
     /// <summary>
     /// Provides access to input actions defined in input action map "Main Map".
     /// </summary>
@@ -354,6 +377,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "MainMap/BottomMove3".
         /// </summary>
         public InputAction @BottomMove3 => m_Wrapper.m_MainMap_BottomMove3;
+        /// <summary>
+        /// Provides access to the underlying input action "MainMap/Confirm".
+        /// </summary>
+        public InputAction @Confirm => m_Wrapper.m_MainMap_Confirm;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -398,6 +425,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @BottomMove3.started += instance.OnBottomMove3;
             @BottomMove3.performed += instance.OnBottomMove3;
             @BottomMove3.canceled += instance.OnBottomMove3;
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
         }
 
         /// <summary>
@@ -427,6 +457,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @BottomMove3.started -= instance.OnBottomMove3;
             @BottomMove3.performed -= instance.OnBottomMove3;
             @BottomMove3.canceled -= instance.OnBottomMove3;
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
         }
 
         /// <summary>
@@ -509,5 +542,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnBottomMove3(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Confirm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnConfirm(InputAction.CallbackContext context);
     }
 }

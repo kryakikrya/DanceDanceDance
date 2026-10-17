@@ -65,6 +65,16 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "Confirm",
+                    "type": "Button",
+                    "id": "e40b38bd-99eb-49b3-be91-cfce9d756bbe",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -131,6 +141,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "BottomMove3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e73d733f-69e7-4107-8e2b-9aa19cd4fb41",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Confirm",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

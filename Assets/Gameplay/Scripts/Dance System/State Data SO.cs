@@ -6,7 +6,6 @@ public class StateDataSO : ScriptableObject
     [SerializeField] private DanceState state;
     public DanceState State => state;
     
-    
     [SerializeField] private Sprite _sprite;
     public Sprite Sprite => _sprite;
 }
