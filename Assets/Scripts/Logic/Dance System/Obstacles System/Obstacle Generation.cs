@@ -13,7 +13,7 @@ public class ObstacleGeneration
 
     private int[] _obstacles;
 
-    public event Action<Obstacle> OnPoseChanged;
+    public event Action<Obstacle> OnObstacleCreated;
 
     private SongClock _clock;
 
@@ -35,7 +35,7 @@ public class ObstacleGeneration
     {
         int index = 0;
 
-        RandomPose(index, GetTimeOfBeat(index));
+        CreateObstacle(index, GetTimeOfBeat(index));
 
         try
         {
@@ -62,7 +62,7 @@ public class ObstacleGeneration
                 {
                     //Debug.Log($"SongTime {_clock.SongTime}");
                     index++;
-                    RandomPose(index, GetTimeOfBeat(index));
+                    CreateObstacle(index, GetTimeOfBeat(index));
                 }
             }
         }
@@ -77,7 +77,7 @@ public class ObstacleGeneration
         return _obstacles[index] * _timeForOneBeat;
     }
 
-    private void RandomPose(int index, float time)
+    private void CreateObstacle(int index, float time)
     {
         DanceState topState = (DanceState)Random.Range(
             (int)DanceState.TopState1,
@@ -91,6 +91,6 @@ public class ObstacleGeneration
         
         Debug.Log($"Current Combination {topState} {bottomState}");
 
-        OnPoseChanged?.Invoke(new Obstacle(index, topState, bottomState, time));
+        OnObstacleCreated?.Invoke(new Obstacle(index, topState, bottomState, time));
     }
 }

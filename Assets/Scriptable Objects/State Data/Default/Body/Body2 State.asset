@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6ce3107eabbbe95a5691dd24179720, type: 3}
+  m_Name: Body2 State
+  m_EditorClassIdentifier: Assembly-CSharp::StateDataSO
+  state: 4
+  _sprites:
+  - {fileID: -8461149082773238314, guid: 518a2acfb2362b4a7bab6b1143a9e94b, type: 3}
+  _timeBetweenSprites: 5

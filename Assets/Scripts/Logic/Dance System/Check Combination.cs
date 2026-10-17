@@ -17,7 +17,9 @@ public class CheckCombination
 
    public event Action<Obstacle> OnObstacleCreated;
    public event Action<Obstacle> OnObstacleDestroyed;
-
+   
+   public float TimeBefore => _timeBefore;
+   public float TimeAfter => _timeAfter;
    public CheckCombination(SongClock clock, ObstacleGeneration generation, float timeBefore, float timeAfter)
    {
       _timeBefore = timeBefore;
@@ -27,7 +29,7 @@ public class CheckCombination
       
       _generation = generation;
 
-      _generation.OnPoseChanged += ChangeObstacle;
+      _generation.OnObstacleCreated += ChangeObstacle;
 
       _songClock = clock;
    }

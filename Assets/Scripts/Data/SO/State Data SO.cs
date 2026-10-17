@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "StateDataSO", menuName = "Scriptable Objects/StateDataSO")]
@@ -5,7 +6,11 @@ public class StateDataSO : ScriptableObject
 {
     [SerializeField] private DanceState state;
     public DanceState State => state;
+
+    [SerializeField]
+    private List<Sprite> _sprites;
+    public List<Sprite> Sprites => _sprites;
     
-    [SerializeField] private Sprite _sprite;
-    public Sprite Sprite => _sprite;
+    [SerializeField] private float _timeBetweenSprites;
+    public float TimeBetweenSprites => _timeBetweenSprites;
 }

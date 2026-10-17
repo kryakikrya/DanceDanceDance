@@ -9,6 +9,13 @@ public class BodyPart : MonoBehaviour
     protected DanceState _currentState;
     
     public DanceState CurrentState => _currentState;
+    
+    private CustomAnimator _animator;
+
+    private void Awake()
+    {
+        _animator = new CustomAnimator(_spriteRenderer);
+    }
 
     public virtual void ChangeState(StateDataSO state)
     {
@@ -16,6 +23,11 @@ public class BodyPart : MonoBehaviour
         
         _currentState = state.State;
 
-        _spriteRenderer.sprite = state.Sprite;
+        if (_animator == null)
+        {
+            _animator = new CustomAnimator(_spriteRenderer);
+        }
+        
+        _animator.PlayAnimation(state.Sprites, state.TimeBetweenSprites).Forget();
     }
 }

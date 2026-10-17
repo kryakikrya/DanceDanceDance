@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: ScoreSystemSettingsSO
   m_EditorClassIdentifier: Assembly-CSharp::ScoreSystemSettingsSO
   _perfectBonus: 50
-  _wrongCombinationTax: 10
-  _tooLateTax: 10
-  _tooEarlyTax: 10
+  _perfectHPBonus: 30
+  _wrongCombinationHPTax: 20
+  _tooLateHPTax: 10
+  _tooEarlyHPTax: 10
   _combinationModifier: 0.05
