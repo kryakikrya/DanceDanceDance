@@ -1,0 +1,81 @@
+using System;
+using DG.Tweening;
+using UnityEngine;
+
+public class ObstacleIcon : MonoBehaviour, IObstacleVisualization
+{
+    [SerializeField] private SpriteRenderer _renderer;
+        
+    private Coroutine _animationCoroutine;
+    private Tween _movementTween;
+    
+    public event Action<int> LifetimeEnded;
+
+    public void ChangeIcon(Sprite sprite)
+    {
+        Debug.Log("Icon Change");
+        _renderer.sprite = sprite;
+    }
+    
+    private int _id;
+    public int ID => _id;
+
+    public void SetID(int id)
+    {
+        _id = id;
+    }
+
+    public void Animate(
+        Vector2 spawnPosition,
+        Vector2 playerPosition,
+        float timeAfter,
+        float duration)
+    {
+        Debug.Log("Icon Start");
+        _movementTween?.Kill();
+
+        if (_animationCoroutine != null)
+        {
+            StopCoroutine(_animationCoroutine);
+        }
+
+        transform.position = spawnPosition;
+
+        _animationCoroutine = StartCoroutine(
+            AnimationCoroutine(spawnPosition, playerPosition, timeAfter, duration)
+        );
+    }
+
+    private System.Collections.IEnumerator AnimationCoroutine(
+        Vector2 spawnPosition,
+        Vector2 playerPosition,
+        float timeAfter,
+        float duration)
+    {
+        Debug.Log("Coroutine Start");
+        _movementTween = transform.DOMove(playerPosition, duration)
+            .SetEase(Ease.Linear)
+            .OnComplete(() => Debug.Log("Obstacle reached player position"));
+
+        yield return _movementTween.WaitForCompletion();
+
+        Vector2 direction = (playerPosition - spawnPosition).normalized;
+        float speed = Vector2.Distance(spawnPosition, playerPosition) / duration;
+
+        Vector2 targetPosition = playerPosition + direction * speed * timeAfter;
+
+        _movementTween = transform.DOMove(targetPosition, timeAfter)
+            .SetEase(Ease.Linear);
+
+        yield return _movementTween.WaitForCompletion();
+
+        _animationCoroutine = null;
+        LifetimeEnded?.Invoke(_id);
+    }
+    
+    public void OnDestroy()
+    {
+        _movementTween?.Kill();
+        Destroy(gameObject);
+    }
+}

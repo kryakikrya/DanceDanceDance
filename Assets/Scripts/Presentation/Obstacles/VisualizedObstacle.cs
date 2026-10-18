@@ -2,7 +2,7 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 
-public class VisualizedObstacle : MonoBehaviour
+public class VisualizedObstacle : MonoBehaviour, IObstacleVisualization
 {
     [field: SerializeField] public PlayerMaskablePart Top { get; private set; }
     [field: SerializeField] public PlayerMaskablePart Bottom { get; private set; }
@@ -80,9 +80,10 @@ public class VisualizedObstacle : MonoBehaviour
         LifetimeEnded?.Invoke(_id);
     }
 
-    private void OnDestroy()
+    public void OnDestroy()
     {
         _movementTween?.Kill();
         _scaleTween?.Kill();
+        Destroy(gameObject);
     }
 }

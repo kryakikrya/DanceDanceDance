@@ -102,6 +102,7 @@ public class CheckCombination
 
    public CheckResultType FinalizeCheck(Obstacle obstacle, CheckResultType type)
    {
+      Debug.Log($"Result {type}");
       OnObstacleDestroyed?.Invoke(obstacle);
       return type;
    }
