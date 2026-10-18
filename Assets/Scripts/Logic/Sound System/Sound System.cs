@@ -20,6 +20,9 @@ public class SoundSystem : IDisposable
     private CancellationTokenSource _musicCts;
 
     private const float FadeDuration = 2f;
+    
+    private float _soundVolumeRecoveryStartTime;
+    private bool _isSoundVolumeRecovering;
 
     public SoundSystem(List<AudioSource> audioSources, CMS cms)
     {
@@ -121,7 +124,34 @@ public class SoundSystem : IDisposable
             return;
         }
 
-        PlayOneShot(clip, 1f);
+        float volume = GetSoundVolume();
+
+        PlayOneShot(clip, volume);
+
+        if (_isSoundVolumeRecovering == false)
+        {
+            _isSoundVolumeRecovering = true;
+            _soundVolumeRecoveryStartTime = Time.unscaledTime;
+        }
+    }
+    
+    private float GetSoundVolume()
+    {
+        if (_isSoundVolumeRecovering == false)
+        {
+            return 1f;
+        }
+
+        float elapsedTime = Time.unscaledTime - _soundVolumeRecoveryStartTime;
+        float volume = Mathf.Floor(elapsedTime * 100f) / 100f;
+
+        if (volume >= 1f)
+        {
+            _isSoundVolumeRecovering = false;
+            return 1f;
+        }
+
+        return Mathf.Clamp01(volume);
     }
 
     public void StopMusic()

@@ -19,16 +19,12 @@ public class CharacterEmotionController : BodyPart
     
     private SoundSystem _soundSystem;
     
-    private CMS _cms;
-    
     private HealthSystem _healthSystem;
 
     [Inject]
-    private void Construct(CMS cms, SoundSystem soundSystem, HealthSystem healthSystem)
+    private void Construct(SoundSystem soundSystem, HealthSystem healthSystem)
     {
         _soundSystem  = soundSystem;
-
-        _cms = cms;
         
         _healthSystem = healthSystem;
     }
@@ -101,7 +97,7 @@ public class CharacterEmotionController : BodyPart
             Debug.Log($"Пытаюсь поменять на {state}");
             ChangeState(state);
             _timer = 0;
-            _soundSystem.PlaySound(_cms.GetEntity<AudioClip>(_emotionSounds[state]));
+            _soundSystem.PlaySound(_emotionSounds[state]);
             
             StartCoroutine(FaceBack(_faceBack));
         }

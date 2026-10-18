@@ -8,6 +8,8 @@ public class DanceConfirm : MonoBehaviour
     [SerializeField] private SubsciptedBodyPart _bottom;
     
     [SerializeField] private CharacterEmotionController _emotions;
+
+    [SerializeField] private ResultIcon _icon;
     
     private PlayerActions _playerActions;
     private CheckCombination _checker;
@@ -43,6 +45,7 @@ public class DanceConfirm : MonoBehaviour
         
         Debug.Log($"Confirm {resultType}");
         
+        _icon.DoResult(resultType);
         _scoreSystem.AddScore(resultType);
         _healthSystem.ChangeHealth(resultType);
         _emotions.PlayEmotion(resultType);
