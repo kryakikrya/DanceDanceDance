@@ -14,8 +14,6 @@ public class CoreInstaller : MonoInstaller
     
     [Header("Sound System")]
     [SerializeField] private List<AudioSource> _audioSources;
-    [SerializeField] private AudioClip _startSong;
-    [SerializeField] private SongSO _startSongSO;
     
     [Header("Player Settings")]
     
@@ -46,6 +44,8 @@ public class CoreInstaller : MonoInstaller
     // ReSharper disable Unity.PerformanceAnalysis
     public override void InstallBindings()
     {
+        Debug.Log("Bindings");
+        
         _gameEntryPoint = 
             new GameEntryPoint(
                 _audioSources, 
@@ -72,6 +72,7 @@ public class CoreInstaller : MonoInstaller
             out ReallifeClock clock,
             out Battery battery);
         
+        Container.Bind<GameEntryPoint>().FromInstance(_gameEntryPoint).AsSingle();
         Container.Bind<CMS>().FromInstance(contentManagementSystem).AsSingle();
         Container.Bind<SongClock>().FromInstance(_clock).AsSingle();
         Container.Bind<SoundSystem>().FromInstance(soundSystem).AsSingle();

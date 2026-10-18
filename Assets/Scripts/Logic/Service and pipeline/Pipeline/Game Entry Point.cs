@@ -34,6 +34,7 @@ public class GameEntryPoint : IDisposable
 
     private SoundSystem _soundSystem;
     private ObstacleGeneration _generation;
+    private HealthSystem _healthSystem;
     
     public GameEntryPoint(List<AudioSource> sources,
         SongClock clock,
@@ -89,9 +90,11 @@ public class GameEntryPoint : IDisposable
         obstacleGeneration = new ObstacleGeneration(_songClock, _obstaclesObjectCreator);
         _generation = obstacleGeneration;
         playerActions = new PlayerActions();
+        _playerActions = playerActions;
         scoreSystem = new ScoreSystem(_combinationSettingsSo);
         checkCombination = new CheckCombination(_songClock, obstacleGeneration, _timeBefore, _timeAfter);
         healthSystem = new HealthSystem(_maxHealth, _combinationSettingsSo);
+        _healthSystem =  healthSystem;
         clock = new ReallifeClock(_startHours, _startMinutes);
         battery = new Battery(clock, _battery);
         DayNightChanging dayNightChanging = new DayNightChanging(clock, _light, _volume);
@@ -102,10 +105,10 @@ public class GameEntryPoint : IDisposable
         SongSO startSongSO
         )
     {
-        Debug.Log("Starting game");
+        Debug.Log($"Starting game {_healthSystem}, ");
         
         _songClock.SetIsPlaying(true);
-        
+        _healthSystem.ResetHealth();
         _playerActions.Enable();
         
         _generation.ChangeSong(startSongSO);

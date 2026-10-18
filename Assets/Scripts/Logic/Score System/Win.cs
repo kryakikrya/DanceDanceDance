@@ -7,11 +7,13 @@ public class Win : MonoBehaviour, IPrefLoader, IPrefSaver
     [SerializeField] private GameObject _winPanel;
 
     private ScoreSystem _scoreSystem;
+    
+    private HealthSystem _healthSystem;
 
     public string PrefKey => "TotalScore";
 
     [Inject]
-    private void Construct(ScoreSystem scoreSystem)
+    private void Construct(ScoreSystem scoreSystem, HealthSystem healthSystem)
     {
         _scoreSystem = scoreSystem;
     }
@@ -23,6 +25,8 @@ public class Win : MonoBehaviour, IPrefLoader, IPrefSaver
 
     public void WinGame()
     {
+        _healthSystem.ResetHealth();
+        
         float totalScore = PlayerPrefs.GetFloat(PrefKey);
         totalScore += _scoreSystem.Score;
 

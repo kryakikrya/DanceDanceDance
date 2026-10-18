@@ -41,6 +41,11 @@ public class HealthSystem
         }
     }
 
+    public void ResetHealth()
+    {
+        _currentHealth = _maxHealth;
+    }
+
     private void Death()
     {
         Debug.Log("OnPLayerDead");

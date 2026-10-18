@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class App : MonoBehaviour
 {
+    [field: SerializeField] public string Name { get; private set; }
     [SerializeField] private GameObject _appPanel;
 
     public virtual void Open()
