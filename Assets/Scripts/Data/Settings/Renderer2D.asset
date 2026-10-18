@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8491294076479659071
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce8b84f5f00e996b192e06cbc2d84baf, type: 3}
-  m_Name: TVScanlinesRendererFeature
-  m_EditorClassIdentifier: Assembly-CSharp::TVScanlinesRendererFeature
-  m_Active: 1
-  _shader: {fileID: 4800000, guid: 58af48f31636322faa7ba4f5b5230074, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39,8 +25,8 @@ MonoBehaviour:
     probeSamplingDebugTexture: {fileID: 2800000, guid: 24ec0e140fb444a44ab96ee80844e18e, type: 3}
     probeVolumeBlendStatesCS: {fileID: 0}
   m_RendererFeatures:
-  - {fileID: -8491294076479659071}
-  m_RendererFeatureMap: c1230db806dd288al
+  - {fileID: 1054482103314446635}
+  m_RendererFeatureMap: 2b7910d6e245a20el
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -70,3 +56,17 @@ MonoBehaviour:
   m_PostProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   m_DefaultMaterialType: 0
   m_DefaultCustomMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+--- !u!114 &1054482103314446635
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c574c7a9d594fb42aa6a92ea8c3bd8f, type: 3}
+  m_Name: TVScanlinesRendererFeature
+  m_EditorClassIdentifier: Assembly-CSharp::TVScanlinesRendererFeature
+  m_Active: 1
+  _shader: {fileID: 4800000, guid: c2ceac869c06adf34b19e4dda6140589, type: 3}

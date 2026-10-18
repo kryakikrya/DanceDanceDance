@@ -124,6 +124,7 @@ public sealed class TVScanlinesRendererFeature : ScriptableRendererFeature
             resourceData.cameraColor = destination;
         }
 #endif
+        
         public override void OnCameraCleanup(CommandBuffer commandBuffer)
         {
             _cameraColorTarget = null;
