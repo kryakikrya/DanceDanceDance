@@ -7,7 +7,7 @@ public class CharacterEmotionController : BodyPart
 {
     [SerializeField] private float _changeEmotionColldown = 2f;
     
-    [SerializeField] private float _autoChangeFace = 4f;
+    [SerializeField] private float _autoChangeFace = 3f;
     
     [SerializeField] private float _faceBack = 1f;
     
@@ -49,25 +49,25 @@ public class CharacterEmotionController : BodyPart
         switch (result)
         {
             case CheckResultType.PerfectTime:
-                PlayEmotion(DanceState.PerfectFace);
+                PlayEmotion(DanceState.PerfectFace, true);
                 break;
             case CheckResultType.NiceTime:
-                PlayEmotion(DanceState.NiceFace);
+                PlayEmotion(DanceState.NiceFace, true);
                 break;
             case CheckResultType.GoodTime:
-                PlayEmotion(DanceState.GoodFace);
+                PlayEmotion(DanceState.GoodFace, true);
                 break;
             case CheckResultType.BadTime:
-                PlayEmotion(DanceState.BadFace);
+                PlayEmotion(DanceState.BadFace, true);
                 break;
             case CheckResultType.WrongCombination:
-                PlayEmotion(DanceState.AngryFace);
+                PlayEmotion(DanceState.AngryFace, true);
                 break;
             case CheckResultType.TooEarly:
-                PlayEmotion(DanceState.AngryFace);
+                PlayEmotion(DanceState.AngryFace, true);
                 break;
             case CheckResultType.TooLate:
-                PlayEmotion(DanceState.AngryFace);
+                PlayEmotion(DanceState.AngryFace, true);
                 break;
         }
     }
@@ -78,14 +78,14 @@ public class CharacterEmotionController : BodyPart
         {
             if (DanceState.FoolishFace != _currentState)
             {
-                PlayEmotion(DanceState.FoolishFace, true);
+                PlayEmotion(DanceState.FoolishFace);
             }
         }
         else
         {
             if (DanceState.FoolishFace != _currentState)
             {
-                PlayEmotion(DanceState.DefaultFace, true);
+                PlayEmotion(DanceState.DefaultFace);
             }
         }
     }

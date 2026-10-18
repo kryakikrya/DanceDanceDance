@@ -960,11 +960,11 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 928377516}
   _bindings:
   - Action: {fileID: -4508999368624702994, guid: 68b9d29702f6a8f6e8d8e59b181ee9c4, type: 3}
-    StateData: {fileID: 11400000, guid: ec9790954591b8f1280d7bc393dac07a, type: 2}
-  - Action: {fileID: 3982278242573170884, guid: 68b9d29702f6a8f6e8d8e59b181ee9c4, type: 3}
-    StateData: {fileID: 11400000, guid: 82bcec6424e71af528a161f0faafaac5, type: 2}
-  - Action: {fileID: -4335215290665119861, guid: 68b9d29702f6a8f6e8d8e59b181ee9c4, type: 3}
     StateData: {fileID: 11400000, guid: a628c7b233575fc4286883f96f5442ef, type: 2}
+  - Action: {fileID: 3982278242573170884, guid: 68b9d29702f6a8f6e8d8e59b181ee9c4, type: 3}
+    StateData: {fileID: 11400000, guid: ec9790954591b8f1280d7bc393dac07a, type: 2}
+  - Action: {fileID: -4335215290665119861, guid: 68b9d29702f6a8f6e8d8e59b181ee9c4, type: 3}
+    StateData: {fileID: 11400000, guid: 82bcec6424e71af528a161f0faafaac5, type: 2}
   _pair: {fileID: 1908191262}
 --- !u!1 &591547142
 GameObject:
@@ -1575,7 +1575,7 @@ MonoBehaviour:
   _iconEndPosition: {x: 4, y: -3}
   _obstaclePrefab: {fileID: 4123955064399738406, guid: 872f5f774ac4e0947933195f45cf48cd, type: 3}
   _obstacleIconPrefab: {fileID: -178525855939466920, guid: 3df98b72e6d120a2fa40f61b3f71a44e, type: 3}
-  _duration: 4
+  _duration: 5
   _iconsSO: {fileID: 11400000, guid: 9a2e40969c0cbe236be5c54546a4ef79, type: 2}
 --- !u!1 &768361751
 GameObject:
@@ -2631,7 +2631,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.90434736
+  m_Volume: 0.9579547
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2764,31 +2764,31 @@ MonoBehaviour:
   - key: 1
     value:
       SoundPath: PerfectTimeSound
-      Sprite: {fileID: 0}
+      Sprite: {fileID: 1396529313476647785, guid: 89db38aabca0c204c8b410689e1228a0, type: 3}
   - key: 0
     value:
       SoundPath: WrongSound
-      Sprite: {fileID: 0}
+      Sprite: {fileID: 988470200833654825, guid: 89db38aabca0c204c8b410689e1228a0, type: 3}
   - key: 2
     value:
       SoundPath: NiceTimeSound
-      Sprite: {fileID: 0}
+      Sprite: {fileID: 6141141678706924162, guid: 89db38aabca0c204c8b410689e1228a0, type: 3}
   - key: 5
     value:
       SoundPath: WrongSound
-      Sprite: {fileID: 0}
+      Sprite: {fileID: 988470200833654825, guid: 89db38aabca0c204c8b410689e1228a0, type: 3}
   - key: 3
     value:
       SoundPath: GoodTimeSound
-      Sprite: {fileID: 0}
+      Sprite: {fileID: -8547705855045004582, guid: 89db38aabca0c204c8b410689e1228a0, type: 3}
   - key: 4
     value:
       SoundPath: BadTImeSound
-      Sprite: {fileID: 0}
+      Sprite: {fileID: -3178596481293987347, guid: 89db38aabca0c204c8b410689e1228a0, type: 3}
   - key: 6
     value:
       SoundPath: WrongSound
-      Sprite: {fileID: 0}
+      Sprite: {fileID: 988470200833654825, guid: 89db38aabca0c204c8b410689e1228a0, type: 3}
   _resultSprite: {fileID: 1137236026}
   _appearDuration: 0.1
   _displayDuration: 0.4
@@ -3184,7 +3184,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.09565264
+  m_Volume: 0.042045295
   m_Pitch: 1
   Loop: 0
   Mute: 0
