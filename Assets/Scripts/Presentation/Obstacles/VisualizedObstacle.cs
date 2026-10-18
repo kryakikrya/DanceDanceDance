@@ -10,7 +10,6 @@ public class VisualizedObstacle : MonoBehaviour
     [SerializeField] private int _layer = 20;
     [SerializeField] private float _sizeFrom;
     [SerializeField] private float _sizeTo;
-    [SerializeField] private float _duration;
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
     private Coroutine _animationCoroutine;
@@ -27,7 +26,7 @@ public class VisualizedObstacle : MonoBehaviour
         _id = id;
     }
 
-    public void Animate(Vector2 spawnPosition, Vector2 playerPosition, float timeAfter)
+    public void Animate(Vector2 spawnPosition, Vector2 playerPosition, float timeAfter, float duration)
     {
         if (_animationCoroutine != null)
         {
@@ -38,34 +37,35 @@ public class VisualizedObstacle : MonoBehaviour
         _scaleTween?.Kill();
 
         _animationCoroutine = StartCoroutine(
-            AnimationCoroutine(spawnPosition, playerPosition, timeAfter)
+            AnimationCoroutine(spawnPosition, playerPosition, timeAfter, duration)
         );
     }
 
     private System.Collections.IEnumerator AnimationCoroutine(
         Vector2 spawnPosition,
         Vector2 playerPosition,
-        float timeAfter)
+        float timeAfter,
+        float duration)
     {
         transform.position = spawnPosition;
         transform.localScale = Vector3.one * _sizeFrom;
 
         Vector2 direction = (playerPosition - spawnPosition).normalized;
         float distance = Vector2.Distance(spawnPosition, playerPosition);
-        float speed = distance / _duration;
-        float totalDuration = _duration + timeAfter;
+        float speed = distance / duration;
+        float totalDuration = duration + timeAfter;
 
         Vector2 endPosition = playerPosition + direction * speed * timeAfter;
 
         float endSize = _sizeFrom +
-                        (_sizeTo - _sizeFrom) * (totalDuration / _duration);
+                        (_sizeTo - _sizeFrom) * (totalDuration / duration);
 
         _movementTween = DOTween.Sequence()
             .Append(transform.DOMove(endPosition, totalDuration)
                 .SetEase(Ease.Linear))
-            .Insert(_duration, _spriteRenderer.DOFade(0f, timeAfter)
+            .Insert(duration, _spriteRenderer.DOFade(0f, timeAfter)
                 .SetEase(Ease.Linear))
-            .InsertCallback(_duration, () => _spriteRenderer.sortingOrder = _layer);
+            .InsertCallback(duration, () => _spriteRenderer.sortingOrder = _layer);
 
         _scaleTween = transform.DOScale(endSize, totalDuration)
             .SetEase(Ease.Linear);

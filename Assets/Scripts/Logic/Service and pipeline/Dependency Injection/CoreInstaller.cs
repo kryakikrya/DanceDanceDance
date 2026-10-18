@@ -6,7 +6,8 @@ public class CoreInstaller : MonoInstaller
 {
     [Header("Services")]
     [SerializeField] private SongClock _clock;
-    [SerializeField] private CombinationSettingsSO combinationSettings;
+    [SerializeField] private CombinationSettingsSO _combinationSettings;
+    [SerializeField] private ObstaclesObjectCreator  _obstaclesObjectCreator;
     
     [Header("Sound System")]
     [SerializeField] private List<AudioSource> _audioSources;
@@ -20,14 +21,16 @@ public class CoreInstaller : MonoInstaller
     [Header("Valid time before and after obstacle")]
     // Аккуратно! Короче если там before и after двух обстаклов друг на друга наложатся, то плохо может быть, так что значения в идеале не слишком большие
     // По идее сработает только Previous, а второй останется, но в любом случае не стоит
-    [SerializeField] private float _timeBefore;
-
-    [SerializeField] private float _timeAfter;
+    [SerializeField] private Dictionary<CheckResultType, float> _typeToBeforeTime = new Dictionary<CheckResultType, float>();
+    public Dictionary<CheckResultType, float> BeforeTime => _typeToBeforeTime;
+    
+    [SerializeField] private Dictionary<CheckResultType, float> _typeToAfterTime = new Dictionary<CheckResultType, float>();
+    public Dictionary<CheckResultType, float> AfterTime => _typeToAfterTime;
     
     // ReSharper disable Unity.PerformanceAnalysis
     public override void InstallBindings()
     {
-        GameEntryPoint gameEntryPoint = new GameEntryPoint(_audioSources, _clock, combinationSettings, _timeBefore, _timeAfter, _maxHealth);
+        GameEntryPoint gameEntryPoint = new GameEntryPoint(_audioSources, _clock, _combinationSettings, _typeToBeforeTime, _typeToAfterTime, _maxHealth, _obstaclesObjectCreator);
         
         gameEntryPoint.StartServices(
             out CMS contentManagementSystem, 

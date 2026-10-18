@@ -11,11 +11,15 @@ public class ObstaclesObjectCreator : MonoBehaviour
 
     [SerializeField] private VisualizedObstacle _obstaclePrefab;
     
+    [SerializeField] private float _duration;
+    
     private Dictionary<int, VisualizedObstacle> _obstacles = new Dictionary<int, VisualizedObstacle>();
     
     private CheckCombination _checkCombination;
 
     private CancellationTokenSource _cts = new CancellationTokenSource();
+
+    public float ObstacleFlyTime => _duration;
 
     [Inject]
     private void Construct(CheckCombination combinations)
@@ -46,7 +50,7 @@ public class ObstaclesObjectCreator : MonoBehaviour
         VisualizedObstacle newObstacle = Instantiate(_obstaclePrefab, _spawnPosition, Quaternion.identity);
         _obstacles.Add(obstacle.ID, newObstacle);
         
-        newObstacle.Animate(_spawnPosition, _playerPosition, _checkCombination.TimeAfter);
+        newObstacle.Animate(_spawnPosition, _playerPosition, _checkCombination.TimeAfter[CheckResultType.BadTime], _duration);
         newObstacle.SetID(obstacle.ID);
         
         newObstacle.LifetimeEnded += DeleteObstacle;

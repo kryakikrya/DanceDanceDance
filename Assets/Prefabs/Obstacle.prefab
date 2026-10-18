@@ -827,7 +827,7 @@ MonoBehaviour:
   _layer: 20
   _sizeFrom: 0.01
   _sizeTo: 1
-  _duration: 5
+  _duration: 4
   _spriteRenderer: {fileID: 67329091373632518}
 --- !u!1 &6074577304476566281
 GameObject:

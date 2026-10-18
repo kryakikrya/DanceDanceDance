@@ -16,10 +16,14 @@ public class ObstacleGeneration
     public event Action<Obstacle> OnObstacleCreated;
 
     private SongClock _clock;
+    
+    private ObstaclesObjectCreator  _obstaclesObjectCreator;
 
-    public ObstacleGeneration(SongClock clock)
+    public ObstacleGeneration(SongClock clock, ObstaclesObjectCreator obstaclesObjectCreator)
     {
         _clock = clock;
+        
+        _obstaclesObjectCreator = obstaclesObjectCreator;
     }
 
     public void ChangeSong(SongSO song)
@@ -35,36 +39,26 @@ public class ObstacleGeneration
     {
         int index = 0;
 
-        CreateObstacle(index, GetTimeOfBeat(index));
-
         try
         {
-            while (!_clock.HasReached(_duration))
+            while (index < _obstacles.Length && GetTimeOfBeat(index) <= _duration)
             {
-                float targetTime = _duration;
-
-                if (index < _obstacles.Length)
-                {
-                    targetTime = _obstacles[index] * _timeForOneBeat;
-
-                    if (targetTime > _duration)
-                    {
-                        targetTime = _duration;
-                    }
-                }
+                float obstacleTime = GetTimeOfBeat(index);
+                float creationTime = obstacleTime - _obstaclesObjectCreator.ObstacleFlyTime;
 
                 await UniTask.WaitUntil(
-                    () => _clock.HasReached(targetTime),
+                    () => _clock.HasReached(creationTime),
                     cancellationToken: _cts.Token
                 );
 
-                if (index < _obstacles.Length && _clock.HasReached(GetTimeOfBeat(index)))
-                {
-                    //Debug.Log($"SongTime {_clock.SongTime}");
-                    index++;
-                    CreateObstacle(index, GetTimeOfBeat(index));
-                }
+                CreateObstacle(index, obstacleTime);
+                index++;
             }
+
+            await UniTask.WaitUntil(
+                () => _clock.HasReached(_duration),
+                cancellationToken: _cts.Token
+            );
         }
         catch (OperationCanceledException)
         {

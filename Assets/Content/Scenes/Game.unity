@@ -765,6 +765,7 @@ MonoBehaviour:
   _spawnPosition: {x: 5, y: -1}
   _playerPosition: {x: 0, y: 2}
   _obstaclePrefab: {fileID: 4123955064399738406, guid: 872f5f774ac4e0947933195f45cf48cd, type: 3}
+  _duration: 0
 --- !u!1 &777521147
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,7 +935,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 7
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1961646256922278657, guid: 147106595893cb456b1816a418f79872, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1091,8 +1092,8 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_MaskInteraction: 2
+  m_SortingOrder: 10
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 6301830202555064615, guid: 147106595893cb456b1816a418f79872, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1149,7 +1150,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.83466697
+  m_Volume: 0.9120129
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1278,7 +1279,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoreInstaller
   _clock: {fileID: 777521149}
-  combinationSettings: {fileID: 11400000, guid: e025eeb24c4bcaab68f4f23ca63ad1af, type: 2}
+  _combinationSettings: {fileID: 11400000, guid: e025eeb24c4bcaab68f4f23ca63ad1af, type: 2}
+  _obstaclesObjectCreator: {fileID: 743371136}
   _audioSources:
   - {fileID: 1268288717}
   - {fileID: 1127323318}
@@ -1289,8 +1291,24 @@ MonoBehaviour:
   _startSong: {fileID: 8300000, guid: a95b353473adb80268c3e47f784c7fe6, type: 3}
   _startSongSO: {fileID: 11400000, guid: a779e5c6cd13ee83d97d31346832e9e3, type: 2}
   _maxHealth: 100
-  _timeBefore: 0.5
-  _timeAfter: 0.5
+  _typeToBeforeTime:
+  - key: 1
+    value: 0.05
+  - key: 4
+    value: 0.5
+  - key: 2
+    value: 0.1
+  - key: 3
+    value: 0.3
+  _typeToAfterTime:
+  - key: 1
+    value: 0.05
+  - key: 4
+    value: 0.5
+  - key: 2
+    value: 0.1
+  - key: 3
+    value: 0.3
 --- !u!1 &1268288715
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,7 +1354,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.16533303
+  m_Volume: 0.087987125
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1663,7 +1681,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 9
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5611852971218203902, guid: 147106595893cb456b1816a418f79872, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1755,7 +1773,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 8
   m_MaskInteraction: 0
   m_Sprite: {fileID: -3531671097495803833, guid: 147106595893cb456b1816a418f79872, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

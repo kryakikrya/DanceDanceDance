@@ -20,25 +20,8 @@ public class HealthSystem
     
     public void ChangeHealth(CheckResultType result)
     {
-        switch (result)
-        {
-            case CheckResultType.PerfectTime:
-                _currentHealth += _settings.PerfectHPBonus;
-                _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
-                break;
-            case CheckResultType.TooEarly:
-                _currentHealth -= _settings.TooEarlyTax;
-                _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
-                break;
-            case CheckResultType.TooLate:
-                _currentHealth -= _settings.TooLateTax;
-                _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
-                break;
-            case CheckResultType.WrongCombination:
-                _currentHealth -= _settings.WrongCombinationTax;
-                _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
-                break;
-        }
+        _currentHealth += _settings.TypeToHealh[result];
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
         
         Debug.Log($"Current Health - {_currentHealth}");
         

@@ -1,10 +1,11 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CheckCombination
 {
-   private float _timeBefore;
-   private float _timeAfter;
+   private Dictionary<CheckResultType, float> _timeBefore;
+   private Dictionary<CheckResultType, float> _timeAfter;
    
    private SongClock _songClock;
    
@@ -18,9 +19,9 @@ public class CheckCombination
    public event Action<Obstacle> OnObstacleCreated;
    public event Action<Obstacle> OnObstacleDestroyed;
    
-   public float TimeBefore => _timeBefore;
-   public float TimeAfter => _timeAfter;
-   public CheckCombination(SongClock clock, ObstacleGeneration generation, float timeBefore, float timeAfter)
+   public Dictionary<CheckResultType, float> TimeBefore => _timeBefore;
+   public Dictionary<CheckResultType, float> TimeAfter => _timeAfter;
+   public CheckCombination(SongClock clock, ObstacleGeneration generation, Dictionary<CheckResultType, float> timeBefore, Dictionary<CheckResultType, float> timeAfter)
    {
       _timeBefore = timeBefore;
       _timeAfter = timeAfter;
@@ -43,40 +44,60 @@ public class CheckCombination
       OnObstacleCreated?.Invoke(newObstacle);
    }
 
+   private static readonly CheckResultType[] _timeResults =
+   {
+      CheckResultType.PerfectTime,
+      CheckResultType.NiceTime,
+      CheckResultType.GoodTime,
+      CheckResultType.BadTime
+   };
+
    public CheckResultType Check(DanceState topState, DanceState bottomState)
    {
       Debug.Log($"{CurrentTime} времени сейчас. {_previousObstacle.Time} - prev, {_currentObstacle.Time} - cur");
-      
-      if (Mathf.Abs(CurrentTime - _previousObstacle.Time) < Mathf.Abs(CurrentTime - _currentObstacle.Time))
-      {
-         if (CurrentTime < _previousObstacle.Time + _timeAfter)
-         {
-            if (_previousObstacle.BottomState == bottomState && _previousObstacle.TopState == topState)
-            {
-               return FinalizeCheck(_previousObstacle,  CheckResultType.PerfectTime);
-            }
-            
-            Debug.Log($"Input {topState} + {bottomState}. It was {_previousObstacle.TopState} - {_previousObstacle.BottomState}");
-            return FinalizeCheck(_previousObstacle,  CheckResultType.WrongCombination);
-         }
 
-         return FinalizeCheck(_previousObstacle,  CheckResultType.TooLate);
+      Obstacle obstacle;
+      Dictionary<CheckResultType, float> timeWindows;
+      CheckResultType outOfTimeResult;
+
+      if (Mathf.Abs(CurrentTime - _previousObstacle.Time) <
+          Mathf.Abs(CurrentTime - _currentObstacle.Time))
+      {
+         obstacle = _previousObstacle;
+         timeWindows = _timeAfter;
+         outOfTimeResult = CheckResultType.TooLate;
       }
       else
       {
-         if (CurrentTime > _currentObstacle.Time - _timeBefore)
-         {
-            if (_currentObstacle.BottomState == bottomState && _currentObstacle.TopState == topState)
-            {
-               return FinalizeCheck(_currentObstacle,  CheckResultType.PerfectTime);
-            }
-            
-            Debug.Log($"Input {topState} + {bottomState}. It was {_currentObstacle.TopState} - {_currentObstacle.BottomState}");
-            return FinalizeCheck(_currentObstacle,  CheckResultType.WrongCombination);
-         }
-
-         return FinalizeCheck(_currentObstacle,  CheckResultType.TooEarly);
+         obstacle = _currentObstacle;
+         timeWindows = _timeBefore;
+         outOfTimeResult = CheckResultType.TooEarly;
       }
+
+      float timeDifference = Mathf.Abs(CurrentTime - obstacle.Time);
+      CheckResultType result = outOfTimeResult;
+
+      foreach (CheckResultType timeResult in _timeResults)
+      {
+         if (timeDifference < timeWindows[timeResult])
+         {
+            result = timeResult;
+            break;
+         }
+      }
+
+      if (result == outOfTimeResult)
+      {
+         return FinalizeCheck(obstacle, outOfTimeResult);
+      }
+
+      if (obstacle.BottomState == bottomState && obstacle.TopState == topState)
+      {
+         return FinalizeCheck(obstacle, result);
+      }
+
+      Debug.Log($"Input {topState} + {bottomState}. It was {obstacle.TopState} - {obstacle.BottomState}");
+      return FinalizeCheck(obstacle, CheckResultType.WrongCombination);
    }
 
    public CheckResultType FinalizeCheck(Obstacle obstacle, CheckResultType type)

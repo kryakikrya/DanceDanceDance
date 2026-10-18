@@ -21,25 +21,15 @@ public class ScoreSystem
     
     public void AddScore(CheckResultType result)
     {
-        switch (result)
+        float scoreBonus = _settings.TypeToHealh[result] * _settings.HealthToScore * (1 + (_combination * _settings.CombinationModifier));
+        if (scoreBonus >= 0)
         {
-            case CheckResultType.PerfectTime:
-                Debug.Log("Perfect");
-                _combination++;
-                _score += _settings.PerfectBonus * (1 + (_settings.CombinationModifier * _combination));
-                break;
-            case CheckResultType.TooEarly:
-                Debug.Log("Early");
-                _combination = 0;
-                break;
-            case CheckResultType.TooLate:
-                Debug.Log("Late");
-                _combination = 0;
-                break;
-            case CheckResultType.WrongCombination:
-                Debug.Log("Wrong Combination");
-                _combination = 0;
-                break;
+            _score += scoreBonus;
+            _combination++;
+        }
+        else
+        {
+            _combination = 0;
         }
         
         OnCheckResult?.Invoke(result);

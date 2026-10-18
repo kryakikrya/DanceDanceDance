@@ -15,12 +15,20 @@ public class GameEntryPoint : IDisposable
 
     private PlayerActions _actions;
     
-    private float _timeBefore;
-    private float _timeAfter;
+    private Dictionary<CheckResultType, float> _timeBefore;
+    private Dictionary<CheckResultType, float> _timeAfter;
+
+    private ObstaclesObjectCreator _obstaclesObjectCreator;
 
     private int _maxHealth;
     
-    public GameEntryPoint(List<AudioSource> sources, SongClock clock, CombinationSettingsSO settings, float timeBefore, float timeAfter, int maxHealth)
+    public GameEntryPoint(List<AudioSource> sources,
+        SongClock clock,
+        CombinationSettingsSO settings,
+        Dictionary<CheckResultType, float> timeBefore,
+        Dictionary<CheckResultType, float> timeAfter,
+        int maxHealth,
+        ObstaclesObjectCreator obstaclesObjectCreator)
     {
         _audioSources = sources;
         
@@ -32,6 +40,8 @@ public class GameEntryPoint : IDisposable
         _timeAfter = timeAfter;
         
         _maxHealth = maxHealth;
+
+        _obstaclesObjectCreator = obstaclesObjectCreator;
     }
 
     public void StartServices(
@@ -47,7 +57,7 @@ public class GameEntryPoint : IDisposable
         ResourceLoader loader = new ResourceLoader();
         contentManagementSystem = new CMS(loader);
         soundSystem = new SoundSystem(_audioSources, contentManagementSystem);
-        obstacleGeneration = new ObstacleGeneration(_songClock);
+        obstacleGeneration = new ObstacleGeneration(_songClock, _obstaclesObjectCreator);
         playerActions = new PlayerActions();
         scoreSystem = new ScoreSystem(_combinationSettingsSo);
         checkCombination = new CheckCombination(_songClock, obstacleGeneration, _timeBefore, _timeAfter);

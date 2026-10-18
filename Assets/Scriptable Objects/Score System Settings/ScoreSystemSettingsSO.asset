@@ -12,9 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 323999eb1b826f050b2adcacc77f90aa, type: 3}
   m_Name: ScoreSystemSettingsSO
   m_EditorClassIdentifier: Assembly-CSharp::ScoreSystemSettingsSO
-  _perfectBonus: 50
-  _perfectHPBonus: 30
-  _wrongCombinationHPTax: 20
-  _tooLateHPTax: 10
-  _tooEarlyHPTax: 10
+  _typeToHealth:
+  - key: 1
+    value: 50
+  - key: 0
+    value: -20
+  - key: 2
+    value: 25
+  - key: 6
+    value: -10
+  - key: 5
+    value: -20
+  - key: 4
+    value: 5
+  - key: 3
+    value: 15
+  _healthToScore: 2
   _combinationModifier: 0.05
