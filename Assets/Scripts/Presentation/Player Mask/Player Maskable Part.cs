@@ -47,7 +47,7 @@ public class PlayerMaskablePart : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"State data not found");
+            Debug.LogWarning($"State data not found {gameObject.name} {isTop} {obstacle.TopState} {obstacle.BottomState}");
         }
     }
 }

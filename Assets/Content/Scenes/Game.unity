@@ -1078,6 +1078,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DanceConfirm
   _top: {fileID: 2077215419}
   _bottom: {fileID: 589789958}
+  _emotions: {fileID: 1702888987}
 --- !u!1 &928377514
 GameObject:
   m_ObjectHideFlags: 0
@@ -2051,12 +2052,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 1702888985}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15ab7ddef61bf8dcabbc0bb0948c6169, type: 3}
+  m_Script: {fileID: 11500000, guid: ba198b12ad7e5ea598d91e6842626303, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BodyPart
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterEmotionController
   _startState: {fileID: 11400000, guid: f9439f399803f800bbb9839230a10ae5, type: 2}
   _spriteRenderer: {fileID: 1075701292}
-  _bindings: []
+  _bindings:
+  - Action: {fileID: 0}
+    StateData: {fileID: 11400000, guid: f9439f399803f800bbb9839230a10ae5, type: 2}
+  - Action: {fileID: 0}
+    StateData: {fileID: 11400000, guid: 91026bc011dbe8f9799959cb111ae974, type: 2}
+  - Action: {fileID: 0}
+    StateData: {fileID: 11400000, guid: f070c33fa58d6d85fb83de1428a10981, type: 2}
+  - Action: {fileID: 0}
+    StateData: {fileID: 11400000, guid: cab39083ef670b3569c8949fbb7cc6f5, type: 2}
+  - Action: {fileID: 0}
+    StateData: {fileID: 11400000, guid: 04d148be8b9ea8b6b981913232e39848, type: 2}
+  - Action: {fileID: 0}
+    StateData: {fileID: 11400000, guid: 6b08f3649d333feb2bd43bffa65df525, type: 2}
+  - Action: {fileID: 0}
+    StateData: {fileID: 11400000, guid: a08144b61a745e815bfa253b4311fe13, type: 2}
+  _changeEmotionColldown: 2
+  _hpPercentForFoolishFace: 50
+  _emotionSounds:
+  - key: 11
+    value: FoolishFaceSound
+  - key: 6
+    value: DefaultFaceSound
+  - key: 7
+    value: PerfectFaceSound
+  - key: 8
+    value: NiceFaceSound
+  - key: 9
+    value: GoodFaceSound
+  - key: 12
+    value: AngryFaceSound
+  - key: 10
+    value: BadFaceSound
 --- !u!1 &1705708061
 GameObject:
   m_ObjectHideFlags: 0

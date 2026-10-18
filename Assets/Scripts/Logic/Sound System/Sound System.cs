@@ -117,7 +117,7 @@ public class SoundSystem : IDisposable
     {
         if (clip == null)
         {
-            Debug.LogAssertion("AudioClip == null");
+            Debug.LogWarning("AudioClip == null");
             return;
         }
 

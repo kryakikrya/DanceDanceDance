@@ -5,5 +5,12 @@ public enum DanceState
     TopState3,
     BottomState1,
     BottomState2,
-    BottomState3
+    BottomState3,
+    DefaultFace,
+    PerfectFace,
+    NiceFace,
+    GoodFace,
+    BadFace,
+    FoolishFace,
+    AngryFace
 }

@@ -10,6 +10,10 @@ public class HealthSystem
 
     private event Action OnPlayerDead;
     
+    public float CurrentHealth => _currentHealth;
+    
+    public float MaxHealth => _maxHealth;
+    
     public HealthSystem(int maxHealth, CombinationSettingsSO settings)
     {
         _settings = settings;

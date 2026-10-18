@@ -7,6 +7,8 @@ public class DanceConfirm : MonoBehaviour
     [SerializeField] private SubsciptedBodyPart _top;
     [SerializeField] private SubsciptedBodyPart _bottom;
     
+    [SerializeField] private CharacterEmotionController _emotions;
+    
     private PlayerActions _playerActions;
     private CheckCombination _checker;
     private ScoreSystem _scoreSystem;
@@ -37,13 +39,12 @@ public class DanceConfirm : MonoBehaviour
     
     private void OnConfirm(InputAction.CallbackContext context)
     {
-        Debug.Log($"Confirm top");
-        Debug.Log($"{_top}");
-        Debug.Log($"{_bottom}");
-
         CheckResultType resultType = _checker.Check(_top.CurrentState, _bottom.CurrentState);
+        
+        Debug.Log($"Confirm {resultType}");
         
         _scoreSystem.AddScore(resultType);
         _healthSystem.ChangeHealth(resultType);
+        _emotions.PlayEmotion(resultType);
     }
 }

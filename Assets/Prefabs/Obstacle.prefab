@@ -471,7 +471,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 41f939c6f6ccf88d89e118de7c3c29d7, type: 2}
   - {fileID: 11400000, guid: 3c73a8a3a97a3b488b87cd1f45eeec57, type: 2}
   - {fileID: 11400000, guid: af59c614ff3759e488d2da4a26000e7e, type: 2}
-  _pair: {fileID: 7998050788656590732}
+  _pair: {fileID: 3560847519413624411}
 --- !u!1 &2505228574273546247
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,7 +827,6 @@ MonoBehaviour:
   _layer: 20
   _sizeFrom: 0.01
   _sizeTo: 1
-  _duration: 4
   _spriteRenderer: {fileID: 67329091373632518}
 --- !u!1 &6074577304476566281
 GameObject:

@@ -26,8 +26,11 @@ public class BodyPart : MonoBehaviour
     
     public void ChangeState(DanceState state)
     {
+        Debug.Log($"Changing state to {state}");
+        
         foreach (var bind in _bindings)
         {
+            Debug.Log($"Checking for state {bind.StateData.State}");
             if (bind.StateData.State == state)
             {
                 _currentState = state;
@@ -36,6 +39,10 @@ public class BodyPart : MonoBehaviour
                 {
                     _animator = new CustomAnimator(_spriteRenderer);
                 }
+                
+                _animator.PlayAnimation(bind.StateData.Sprites, bind.StateData.TimeBetweenSprites).Forget();
+
+                return;
             }
         }
     }
