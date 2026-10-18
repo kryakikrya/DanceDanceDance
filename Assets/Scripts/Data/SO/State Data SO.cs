@@ -13,4 +13,7 @@ public class StateDataSO : ScriptableObject
     
     [SerializeField] private float _timeBetweenSprites;
     public float TimeBetweenSprites => _timeBetweenSprites;
+    
+    [SerializeField] private Vector2 _offset;
+    public Vector2 Offset => _offset;
 }

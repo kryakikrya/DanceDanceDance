@@ -9,8 +9,6 @@ public class SubsciptedBodyPart : BodyPart
     [Inject] private PlayerActions _playerActions;
     
     [Header("Bindings")]
-    
-    [SerializeField] private List<Binding> _bindings;
 
     private readonly List<(InputAction Action, Action<InputAction.CallbackContext> Callback)> _subscriptions = new List<(InputAction Action, Action<InputAction.CallbackContext> Callback)>();
 

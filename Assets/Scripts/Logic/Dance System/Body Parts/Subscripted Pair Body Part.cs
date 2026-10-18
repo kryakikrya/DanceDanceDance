@@ -8,6 +8,6 @@ public class SubscriptedPairBodyPart : SubsciptedBodyPart
     {
         base.ChangeState(state);
         
-        _pair.ChangeState(state);
+        _pair.ChangeState(state.State);
     }
 }
