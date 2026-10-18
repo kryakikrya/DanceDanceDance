@@ -41,22 +41,45 @@ public class ObstaclesObjectCreator : MonoBehaviour
 
     private void CreateObstacle(Obstacle obstacle)
     {
+        Debug.Log($"Добавляю Obstacle {obstacle.ID}");
+        
         VisualizedObstacle newObstacle = Instantiate(_obstaclePrefab, _spawnPosition, Quaternion.identity);
         _obstacles.Add(obstacle.ID, newObstacle);
         
         newObstacle.Animate(_spawnPosition, _playerPosition, _checkCombination.TimeAfter);
+        newObstacle.SetID(obstacle.ID);
+        
+        newObstacle.LifetimeEnded += DeleteObstacle;
+        
         newObstacle.Top.ChangeState(obstacle, true);
         newObstacle.Bottom.ChangeState(obstacle, false);
     }
 
-    private void DeleteObstacle(Obstacle obstacle)
+    private void DeleteObstacle(int id)
     {
-        if (!_obstacles.TryGetValue(obstacle.ID, out VisualizedObstacle gameObject))
+        Debug.Log($"Удаляю Obstacle {id}");
+        
+        if (!_obstacles.TryGetValue(id, out VisualizedObstacle obstacleObject))
         {
             return;
         }
 
-        Destroy(gameObject);
-        _obstacles.Remove(obstacle.ID);
+        Destroy(obstacleObject.gameObject);
+        _obstacles.Remove(id);
+    }
+    
+    private void DeleteObstacle(Obstacle obstacle)
+    {
+        int id = obstacle.ID;
+        
+        Debug.Log($"Удаляю Obstacle {id}");
+        
+        if (!_obstacles.TryGetValue(id, out VisualizedObstacle obstacleObject))
+        {
+            return;
+        }
+
+        Destroy(obstacleObject.gameObject);
+        _obstacles.Remove(id);
     }
 }

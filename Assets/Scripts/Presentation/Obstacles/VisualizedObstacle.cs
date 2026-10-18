@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -15,6 +16,16 @@ public class VisualizedObstacle : MonoBehaviour
     private Coroutine _animationCoroutine;
     private Tween _movementTween;
     private Tween _scaleTween;
+
+    public event Action<int> LifetimeEnded;
+
+    private int _id;
+    public int ID => _id;
+
+    public void SetID(int id)
+    {
+        _id = id;
+    }
 
     public void Animate(Vector2 spawnPosition, Vector2 playerPosition, float timeAfter)
     {
@@ -39,25 +50,24 @@ public class VisualizedObstacle : MonoBehaviour
         transform.position = spawnPosition;
         transform.localScale = Vector3.one * _sizeFrom;
 
-        _movementTween = transform.DOMove(playerPosition, _duration)
-            .SetEase(Ease.Linear);
-
-        _scaleTween = transform.DOScale(_sizeTo, _duration)
-            .SetEase(Ease.Linear);
-
-        while (_movementTween.IsActive() && !_movementTween.IsComplete())
-        {
-            yield return null;
-        }
-
-        _spriteRenderer.sortingOrder = _layer;
-
         Vector2 direction = (playerPosition - spawnPosition).normalized;
-        float speed = (playerPosition - spawnPosition).magnitude / _duration;
+        float distance = Vector2.Distance(spawnPosition, playerPosition);
+        float speed = distance / _duration;
+        float totalDuration = _duration + timeAfter;
 
-        _movementTween = transform.DOMove(
-                (Vector2)playerPosition + direction * speed * timeAfter,
-                timeAfter)
+        Vector2 endPosition = playerPosition + direction * speed * timeAfter;
+
+        float endSize = _sizeFrom +
+                        (_sizeTo - _sizeFrom) * (totalDuration / _duration);
+
+        _movementTween = DOTween.Sequence()
+            .Append(transform.DOMove(endPosition, totalDuration)
+                .SetEase(Ease.Linear))
+            .Insert(_duration, _spriteRenderer.DOFade(0f, timeAfter)
+                .SetEase(Ease.Linear))
+            .InsertCallback(_duration, () => _spriteRenderer.sortingOrder = _layer);
+
+        _scaleTween = transform.DOScale(endSize, totalDuration)
             .SetEase(Ease.Linear);
 
         while (_movementTween.IsActive() && !_movementTween.IsComplete())
@@ -66,6 +76,8 @@ public class VisualizedObstacle : MonoBehaviour
         }
 
         _animationCoroutine = null;
+        
+        LifetimeEnded?.Invoke(_id);
     }
 
     private void OnDestroy()
