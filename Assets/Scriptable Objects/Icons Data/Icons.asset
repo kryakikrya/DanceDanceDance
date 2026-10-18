@@ -27,7 +27,7 @@ MonoBehaviour:
     value: {fileID: 5844800808636546577, guid: ef0452a66f2606da6bd54b2624026b4c, type: 3}
   - key:
       Top: 1
-      Bottom: 0
+      Bottom: 3
     value: {fileID: -4572332067916639146, guid: ef0452a66f2606da6bd54b2624026b4c, type: 3}
   - key:
       Top: 1
@@ -39,7 +39,7 @@ MonoBehaviour:
     value: {fileID: -8509866328824962414, guid: ef0452a66f2606da6bd54b2624026b4c, type: 3}
   - key:
       Top: 2
-      Bottom: 0
+      Bottom: 3
     value: {fileID: 4803814078533532082, guid: ef0452a66f2606da6bd54b2624026b4c, type: 3}
   - key:
       Top: 2

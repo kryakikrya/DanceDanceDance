@@ -5,6 +5,8 @@ using UnityEngine;
 public class ObstacleIcon : MonoBehaviour, IObstacleVisualization
 {
     [SerializeField] private SpriteRenderer _renderer;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private SpriteRenderer _spriteRenderer2;
         
     private Coroutine _animationCoroutine;
     private Tween _movementTween;
@@ -53,6 +55,7 @@ public class ObstacleIcon : MonoBehaviour, IObstacleVisualization
         float duration)
     {
         Debug.Log("Coroutine Start");
+
         _movementTween = transform.DOMove(playerPosition, duration)
             .SetEase(Ease.Linear)
             .OnComplete(() => Debug.Log("Obstacle reached player position"));
@@ -64,8 +67,13 @@ public class ObstacleIcon : MonoBehaviour, IObstacleVisualization
 
         Vector2 targetPosition = playerPosition + direction * speed * timeAfter;
 
-        _movementTween = transform.DOMove(targetPosition, timeAfter)
-            .SetEase(Ease.Linear);
+        _movementTween = DOTween.Sequence()
+            .Append(transform.DOMove(targetPosition, timeAfter)
+                .SetEase(Ease.Linear))
+            .Join(_spriteRenderer.DOFade(0f, timeAfter)
+                .SetEase(Ease.Linear))
+            .Join(_spriteRenderer2.DOFade(0f, timeAfter)
+            .SetEase(Ease.Linear));
 
         yield return _movementTween.WaitForCompletion();
 

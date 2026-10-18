@@ -825,7 +825,7 @@ MonoBehaviour:
   <Top>k__BackingField: {fileID: 6173588013939706534}
   <Bottom>k__BackingField: {fileID: 7998050788656590732}
   _layer: 20
-  _sizeFrom: 0.01
+  _sizeFrom: 0.5
   _sizeTo: 1
   _spriteRenderer: {fileID: 67329091373632518}
 --- !u!1 &6074577304476566281

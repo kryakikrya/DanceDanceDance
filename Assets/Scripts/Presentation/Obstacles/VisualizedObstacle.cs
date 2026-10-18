@@ -40,7 +40,7 @@ public class VisualizedObstacle : MonoBehaviour, IObstacleVisualization
             AnimationCoroutine(spawnPosition, playerPosition, timeAfter, duration)
         );
     }
-
+    
     private System.Collections.IEnumerator AnimationCoroutine(
         Vector2 spawnPosition,
         Vector2 playerPosition,
@@ -49,6 +49,17 @@ public class VisualizedObstacle : MonoBehaviour, IObstacleVisualization
     {
         transform.position = spawnPosition;
         transform.localScale = Vector3.one * _sizeFrom;
+
+        float initialAlpha = _spriteRenderer.color.a;
+        _spriteRenderer.color = new Color(
+            _spriteRenderer.color.r,
+            _spriteRenderer.color.g,
+            _spriteRenderer.color.b,
+            0f
+        );
+
+        _spriteRenderer.DOFade(initialAlpha, 0.5f)
+            .SetEase(Ease.Linear);
 
         Vector2 direction = (playerPosition - spawnPosition).normalized;
         float distance = Vector2.Distance(spawnPosition, playerPosition);
@@ -76,7 +87,7 @@ public class VisualizedObstacle : MonoBehaviour, IObstacleVisualization
         }
 
         _animationCoroutine = null;
-        
+
         LifetimeEnded?.Invoke(_id);
     }
 

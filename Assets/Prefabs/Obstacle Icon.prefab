@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleIcon
   _renderer: {fileID: 8644921758493818877}
+  _spriteRenderer: {fileID: 6372161440857786127}
+  _spriteRenderer2: {fileID: 8644921758493818877}
 --- !u!1 &3473860752054879526
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,6 +230,6 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
