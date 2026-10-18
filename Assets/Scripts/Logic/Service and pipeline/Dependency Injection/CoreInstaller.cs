@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 using Zenject;
 
 public class CoreInstaller : MonoInstaller
@@ -26,11 +29,35 @@ public class CoreInstaller : MonoInstaller
     
     [SerializeField] private Dictionary<CheckResultType, float> _typeToAfterTime = new Dictionary<CheckResultType, float>();
     public Dictionary<CheckResultType, float> AfterTime => _typeToAfterTime;
+
+    [Header("Battery and Time")]
+    
+    [SerializeField] private int _startHours;
+    [SerializeField] private int _startMinutes;
+    [SerializeField] private Image[] _battery;
+    
+    [Header("Day and Night System")]
+    
+    [SerializeField] private  Light2D _light;
+    [SerializeField] private  Volume _volume;
     
     // ReSharper disable Unity.PerformanceAnalysis
     public override void InstallBindings()
     {
-        GameEntryPoint gameEntryPoint = new GameEntryPoint(_audioSources, _clock, _combinationSettings, _typeToBeforeTime, _typeToAfterTime, _maxHealth, _obstaclesObjectCreator);
+        GameEntryPoint gameEntryPoint = 
+            new GameEntryPoint(
+                _audioSources, 
+                _clock, 
+                _combinationSettings, 
+                _typeToBeforeTime, 
+                _typeToAfterTime, 
+                _maxHealth, 
+                _obstaclesObjectCreator,
+                _startHours,
+                _startMinutes,
+                _battery,
+                _light,
+                _volume);
         
         gameEntryPoint.StartServices(
             out CMS contentManagementSystem, 
@@ -39,7 +66,9 @@ public class CoreInstaller : MonoInstaller
             out PlayerActions playerActions,
             out ScoreSystem scoreSystem,
             out CheckCombination checkCombination,
-            out HealthSystem healthSystem);
+            out HealthSystem healthSystem,
+            out ReallifeClock clock,
+            out Battery battery);
         
         Container.Bind<CMS>().FromInstance(contentManagementSystem).AsSingle();
         Container.Bind<SongClock>().FromInstance(_clock).AsSingle();
@@ -49,6 +78,8 @@ public class CoreInstaller : MonoInstaller
         Container.Bind<ScoreSystem>().FromInstance(scoreSystem).AsSingle();
         Container.Bind<CheckCombination>().FromInstance(checkCombination).AsSingle();
         Container.Bind<HealthSystem>().FromInstance(healthSystem).AsSingle();
+        Container.Bind<ReallifeClock>().FromInstance(clock).AsSingle();
+        Container.Bind<Battery>().FromInstance(battery).AsSingle();
         
         gameEntryPoint.StartGame(
             soundSystem, 

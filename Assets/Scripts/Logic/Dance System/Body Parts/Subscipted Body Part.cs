@@ -14,8 +14,6 @@ public class SubsciptedBodyPart : BodyPart
 
     private void OnEnable()
     {
-        ChangeState(_startState);
-        
         foreach (var binding in _bindings)
         {
             var reference = binding.Action.action;

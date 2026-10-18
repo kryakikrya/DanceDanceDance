@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class GameEntryPoint : IDisposable
 {
@@ -22,13 +25,25 @@ public class GameEntryPoint : IDisposable
 
     private int _maxHealth;
     
+    private int _startHours;
+    private int _startMinutes;
+    private Image[] _battery;
+    
+    private  Light2D _light;
+    private  Volume _volume;
+    
     public GameEntryPoint(List<AudioSource> sources,
         SongClock clock,
         CombinationSettingsSO settings,
         Dictionary<CheckResultType, float> timeBefore,
         Dictionary<CheckResultType, float> timeAfter,
         int maxHealth,
-        ObstaclesObjectCreator obstaclesObjectCreator)
+        ObstaclesObjectCreator obstaclesObjectCreator,
+        int startHours,
+        int startMinutes,
+        Image[] battery,
+        Light2D light,
+        Volume volume)
     {
         _audioSources = sources;
         
@@ -42,6 +57,14 @@ public class GameEntryPoint : IDisposable
         _maxHealth = maxHealth;
 
         _obstaclesObjectCreator = obstaclesObjectCreator;
+        
+        _startHours = startHours;
+        _startMinutes = startMinutes;
+        
+        _battery = battery;
+        
+        _light =  light;
+        _volume = volume;
     }
 
     public void StartServices(
@@ -51,7 +74,9 @@ public class GameEntryPoint : IDisposable
         out PlayerActions playerActions,
         out ScoreSystem scoreSystem,
         out CheckCombination checkCombination,
-        out HealthSystem healthSystem
+        out HealthSystem healthSystem,
+        out ReallifeClock clock,
+        out Battery battery
         )
     {
         ResourceLoader loader = new ResourceLoader();
@@ -62,6 +87,9 @@ public class GameEntryPoint : IDisposable
         scoreSystem = new ScoreSystem(_combinationSettingsSo);
         checkCombination = new CheckCombination(_songClock, obstacleGeneration, _timeBefore, _timeAfter);
         healthSystem = new HealthSystem(_maxHealth, _combinationSettingsSo);
+        clock = new ReallifeClock(_startHours, _startMinutes);
+        battery = new Battery(clock, _battery);
+        DayNightChanging dayNightChanging = new DayNightChanging(clock, _light, _volume);
     }
 
     public void StartGame(
@@ -69,7 +97,8 @@ public class GameEntryPoint : IDisposable
         AudioClip startSong, 
         SongSO startSongSO, 
         ObstacleGeneration generation, 
-        PlayerActions playerActions)
+        PlayerActions playerActions
+        )
     {
         Debug.Log("Starting game");
         

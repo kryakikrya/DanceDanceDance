@@ -22,6 +22,8 @@ public class BodyPart : MonoBehaviour
         _animator = new CustomAnimator(_spriteRenderer);
         
         _basePosition =  _spriteRenderer.transform.localPosition;
+        
+        ChangeState(_startState);
     }
     
     public void ChangeState(DanceState state)

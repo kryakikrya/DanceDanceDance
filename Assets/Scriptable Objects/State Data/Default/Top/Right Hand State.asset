@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f6ce3107eabbbe95a5691dd24179720, type: 3}
-  m_Name: Top2 State
+  m_Name: Right Hand State
   m_EditorClassIdentifier: Assembly-CSharp::StateDataSO
   state: 1
   _sprites:
-  - {fileID: -5915903947533245053, guid: 0d0cfb31e6343d0ed8057e793f2fd923, type: 3}
-  _timeBetweenSprites: 5
+  - {fileID: 1886282393800942902, guid: 1a45e024c6539358cb6d183fa3087640, type: 3}
+  - {fileID: 8040269699668750836, guid: 1a45e024c6539358cb6d183fa3087640, type: 3}
+  - {fileID: 1886282393800942902, guid: 1a45e024c6539358cb6d183fa3087640, type: 3}
+  - {fileID: 8167801395407784522, guid: 1a45e024c6539358cb6d183fa3087640, type: 3}
+  _timeBetweenSprites: 0.1
   _offset: {x: 0, y: 0.65}
