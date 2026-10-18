@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SongClock : MonoBehaviour
@@ -17,6 +18,11 @@ public class SongClock : MonoBehaviour
             _songTimer += Time.deltaTime;
             //Debug.Log(_songTimer);
         }
+    }
+
+    private void OnEnable()
+    {
+        _songTimer = 0;
     }
 
     public void SetIsPlaying(bool isPlaying)

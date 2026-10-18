@@ -28,6 +28,8 @@ public class ObstacleGeneration
 
     public void ChangeSong(SongSO song)
     {
+        Stop();
+        
         _duration = song.Duration;
         
         _timeForOneBeat = 60f / song.BPM;
@@ -86,5 +88,12 @@ public class ObstacleGeneration
         Debug.Log($"Current Combination {topState} {bottomState}");
 
         OnObstacleCreated?.Invoke(new Obstacle(index, topState, bottomState, time));
+    }
+    
+    public void Stop()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+        _cts = new CancellationTokenSource();
     }
 }

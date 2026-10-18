@@ -41,10 +41,12 @@ public class CoreInstaller : MonoInstaller
     [SerializeField] private  Light2D _light;
     [SerializeField] private  Volume _volume;
     
+    private GameEntryPoint _gameEntryPoint;
+    
     // ReSharper disable Unity.PerformanceAnalysis
     public override void InstallBindings()
     {
-        GameEntryPoint gameEntryPoint = 
+        _gameEntryPoint = 
             new GameEntryPoint(
                 _audioSources, 
                 _clock, 
@@ -59,7 +61,7 @@ public class CoreInstaller : MonoInstaller
                 _light,
                 _volume);
         
-        gameEntryPoint.StartServices(
+        _gameEntryPoint.StartServices(
             out CMS contentManagementSystem, 
             out SoundSystem soundSystem,
             out ObstacleGeneration generation,
@@ -80,12 +82,5 @@ public class CoreInstaller : MonoInstaller
         Container.Bind<HealthSystem>().FromInstance(healthSystem).AsSingle();
         Container.Bind<ReallifeClock>().FromInstance(clock).AsSingle();
         Container.Bind<Battery>().FromInstance(battery).AsSingle();
-        
-        gameEntryPoint.StartGame(
-            soundSystem, 
-            _startSong, 
-            _startSongSO, 
-            generation, 
-            playerActions);
     }
 }

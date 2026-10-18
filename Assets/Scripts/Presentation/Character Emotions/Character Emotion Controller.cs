@@ -72,20 +72,22 @@ public class CharacterEmotionController : BodyPart
         }
     }
 
-    private void ChooseDefaultEmotion()
+    private void ChooseDefaultEmotion(bool force = false)
     {
+        Debug.Log("Choose Default Emotion");
+        
         if (_healthSystem.CurrentHealth / _healthSystem.MaxHealth < _hpPercentForFoolishFace / 100)
         {
             if (DanceState.FoolishFace != _currentState)
             {
-                PlayEmotion(DanceState.FoolishFace);
+                PlayEmotion(DanceState.FoolishFace, force);
             }
         }
         else
         {
             if (DanceState.FoolishFace != _currentState)
             {
-                PlayEmotion(DanceState.DefaultFace);
+                PlayEmotion(DanceState.DefaultFace, force);
             }
         }
     }
@@ -99,14 +101,16 @@ public class CharacterEmotionController : BodyPart
             _timer = 0;
             _soundSystem.PlaySound(_emotionSounds[state]);
             
-            StartCoroutine(FaceBack(_faceBack));
+            StartCoroutine(FaceBack(_faceBack, force));
         }
     }
     
-    private System.Collections.IEnumerator FaceBack(float delay)
+    private System.Collections.IEnumerator FaceBack(float delay, bool force = false)
     {
         yield return new WaitForSeconds(delay);
+        
+        _timer = 0;
 
-        ChooseDefaultEmotion();
+        ChooseDefaultEmotion(force);
     }
 }

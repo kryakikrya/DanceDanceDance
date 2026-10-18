@@ -8,7 +8,9 @@ public class HealthSystem
     
     private CombinationSettingsSO _settings;
 
-    private event Action OnPlayerDead;
+    public event Action OnPlayerDead;
+    
+    public event Action OnHealthChanged;
     
     public float CurrentHealth => _currentHealth;
     
@@ -28,6 +30,8 @@ public class HealthSystem
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
         
         Debug.Log($"Current Health - {_currentHealth}");
+        
+        OnHealthChanged?.Invoke();
         
         if (_currentHealth <= 0)
         {

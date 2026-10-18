@@ -20,6 +20,8 @@ public class ObstaclesObjectCreator : MonoBehaviour
     
     [SerializeField] private IconsSO _iconsSO;
     
+    [Inject] private HealthSystem _healthSystem;
+    
     private Dictionary<int, (IObstacleVisualization, IObstacleVisualization)> _obstacles = new Dictionary<int, (IObstacleVisualization, IObstacleVisualization)>();
     
     private CheckCombination _checkCombination;
@@ -48,6 +50,8 @@ public class ObstaclesObjectCreator : MonoBehaviour
         _cts.Cancel();
         _cts.Dispose();
         _cts = null;
+
+        DeleteAll();
     }
 
     private void CreateObstacle(Obstacle obstacle)
@@ -89,7 +93,9 @@ public class ObstaclesObjectCreator : MonoBehaviour
         
         _obstacles.Remove(id);
         obstacleObject.Item1.OnDestroy();
+        obstacleObject.Item1.LifetimeEnded -= DeleteObstacle;
         obstacleObject.Item2.OnDestroy();
+        obstacleObject.Item2.LifetimeEnded -= DeleteObstacle;
     }
     
     private void DeleteObstacle(Obstacle obstacle)
@@ -104,9 +110,20 @@ public class ObstaclesObjectCreator : MonoBehaviour
         }
         
         _obstacles.Remove(id);
+        
+        _healthSystem.ChangeHealth(CheckResultType.TooLate);
+        
         obstacleObject.Item1.LifetimeEnded -= DeleteObstacle;
         obstacleObject.Item1.OnDestroy();
         obstacleObject.Item2.LifetimeEnded -= DeleteObstacle;
         obstacleObject.Item2.OnDestroy();
+    }
+
+    public void DeleteAll()
+    {
+        foreach (KeyValuePair<int, (IObstacleVisualization, IObstacleVisualization)> obstacle in _obstacles)
+        {
+            DeleteObstacle(obstacle.Key);
+        }
     }
 }

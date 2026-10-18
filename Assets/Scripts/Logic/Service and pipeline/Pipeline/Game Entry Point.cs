@@ -31,6 +31,9 @@ public class GameEntryPoint : IDisposable
     
     private  Light2D _light;
     private  Volume _volume;
+
+    private SoundSystem _soundSystem;
+    private ObstacleGeneration _generation;
     
     public GameEntryPoint(List<AudioSource> sources,
         SongClock clock,
@@ -82,7 +85,9 @@ public class GameEntryPoint : IDisposable
         ResourceLoader loader = new ResourceLoader();
         contentManagementSystem = new CMS(loader);
         soundSystem = new SoundSystem(_audioSources, contentManagementSystem);
+        _soundSystem = soundSystem;
         obstacleGeneration = new ObstacleGeneration(_songClock, _obstaclesObjectCreator);
+        _generation = obstacleGeneration;
         playerActions = new PlayerActions();
         scoreSystem = new ScoreSystem(_combinationSettingsSo);
         checkCombination = new CheckCombination(_songClock, obstacleGeneration, _timeBefore, _timeAfter);
@@ -93,23 +98,20 @@ public class GameEntryPoint : IDisposable
     }
 
     public void StartGame(
-        SoundSystem soundSystem, 
         AudioClip startSong, 
-        SongSO startSongSO, 
-        ObstacleGeneration generation, 
-        PlayerActions playerActions
+        SongSO startSongSO
         )
     {
         Debug.Log("Starting game");
         
         _songClock.SetIsPlaying(true);
         
-        playerActions.Enable();
+        _playerActions.Enable();
         
-        generation.ChangeSong(startSongSO);
-        generation.PlaySong();
+        _generation.ChangeSong(startSongSO);
+        _generation.PlaySong();
         
-        soundSystem.PlayMusic(startSong).Forget();
+        _soundSystem.PlayMusic(startSong).Forget();
     }
     
     public void Dispose()
