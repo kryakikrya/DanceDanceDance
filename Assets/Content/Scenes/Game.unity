@@ -959,11 +959,11 @@ MonoBehaviour:
   _startState: {fileID: 11400000, guid: ec9790954591b8f1280d7bc393dac07a, type: 2}
   _spriteRenderer: {fileID: 928377516}
   _bindings:
-  - Action: {fileID: -4508999368624702994, guid: 68b9d29702f6a8f6e8d8e59b181ee9c4, type: 3}
-    StateData: {fileID: 11400000, guid: a628c7b233575fc4286883f96f5442ef, type: 2}
-  - Action: {fileID: 3982278242573170884, guid: 68b9d29702f6a8f6e8d8e59b181ee9c4, type: 3}
-    StateData: {fileID: 11400000, guid: ec9790954591b8f1280d7bc393dac07a, type: 2}
   - Action: {fileID: -4335215290665119861, guid: 68b9d29702f6a8f6e8d8e59b181ee9c4, type: 3}
+    StateData: {fileID: 11400000, guid: a628c7b233575fc4286883f96f5442ef, type: 2}
+  - Action: {fileID: -4508999368624702994, guid: 68b9d29702f6a8f6e8d8e59b181ee9c4, type: 3}
+    StateData: {fileID: 11400000, guid: ec9790954591b8f1280d7bc393dac07a, type: 2}
+  - Action: {fileID: 3982278242573170884, guid: 68b9d29702f6a8f6e8d8e59b181ee9c4, type: 3}
     StateData: {fileID: 11400000, guid: 82bcec6424e71af528a161f0faafaac5, type: 2}
   _pair: {fileID: 1908191262}
 --- !u!1 &591547142
@@ -2631,7 +2631,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.9579547
+  m_Volume: 0.696175
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3184,7 +3184,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.042045295
+  m_Volume: 0.30382502
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5075,9 +5075,9 @@ MonoBehaviour:
   _startState: {fileID: 11400000, guid: 41f939c6f6ccf88d89e118de7c3c29d7, type: 2}
   _spriteRenderer: {fileID: 1656616945}
   _bindings:
-  - Action: {fileID: 3669322065574051981, guid: 68b9d29702f6a8f6e8d8e59b181ee9c4, type: 3}
-    StateData: {fileID: 11400000, guid: 41f939c6f6ccf88d89e118de7c3c29d7, type: 2}
   - Action: {fileID: -6378902185407872262, guid: 68b9d29702f6a8f6e8d8e59b181ee9c4, type: 3}
+    StateData: {fileID: 11400000, guid: 41f939c6f6ccf88d89e118de7c3c29d7, type: 2}
+  - Action: {fileID: 3669322065574051981, guid: 68b9d29702f6a8f6e8d8e59b181ee9c4, type: 3}
     StateData: {fileID: 11400000, guid: 3c73a8a3a97a3b488b87cd1f45eeec57, type: 2}
   - Action: {fileID: -6061247832494970229, guid: 68b9d29702f6a8f6e8d8e59b181ee9c4, type: 3}
     StateData: {fileID: 11400000, guid: af59c614ff3759e488d2da4a26000e7e, type: 2}
