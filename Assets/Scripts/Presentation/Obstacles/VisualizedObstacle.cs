@@ -11,15 +11,10 @@ public class VisualizedObstacle : MonoBehaviour
     [SerializeField] private float _sizeTo;
     [SerializeField] private float _duration;
 
-    private SpriteRenderer _spriteRenderer;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
     private Coroutine _animationCoroutine;
     private Tween _movementTween;
     private Tween _scaleTween;
-
-    private void Awake()
-    {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-    }
 
     public void Animate(Vector2 spawnPosition, Vector2 playerPosition, float timeAfter)
     {

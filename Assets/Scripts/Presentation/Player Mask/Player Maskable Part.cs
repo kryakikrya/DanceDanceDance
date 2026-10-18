@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,13 @@ public class PlayerMaskablePart : MonoBehaviour
     [SerializeField] protected SpriteMask _spriteMask;
     
     [SerializeField] private List<StateDataSO> _stateData;
+
+    private Vector2 _basePosition;
+    
+    private void Awake()
+    {
+        _basePosition = _spriteMask.transform.localPosition;    
+    }
 
     public virtual void ChangeState(Obstacle obstacle, bool isTop)
     {
@@ -18,6 +26,7 @@ public class PlayerMaskablePart : MonoBehaviour
             {
                 if (state.State == obstacle.TopState)
                 {
+                    _spriteRenderer.transform.localPosition = _basePosition + state.Offset;
                     sprite = state.Sprites[0];
                 }   
             }
@@ -25,6 +34,7 @@ public class PlayerMaskablePart : MonoBehaviour
             {
                 if (state.State == obstacle.BottomState)
                 {
+                    _spriteRenderer.transform.localPosition = _basePosition + state.Offset;
                     sprite = state.Sprites[0];
                 }   
             }
