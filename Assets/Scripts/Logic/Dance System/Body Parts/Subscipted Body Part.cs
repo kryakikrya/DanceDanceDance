@@ -14,6 +14,9 @@ public class SubsciptedBodyPart : BodyPart
 
     private void OnEnable()
     {
+        _animator = new CustomAnimator(_spriteRenderer);
+        ChangeState(_startState);
+        
         foreach (var binding in _bindings)
         {
             var reference = binding.Action.action;
