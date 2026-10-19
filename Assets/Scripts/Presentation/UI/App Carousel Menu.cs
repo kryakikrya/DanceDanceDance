@@ -6,10 +6,11 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Zenject;
 
-public class AppCarouselMenu : MonoBehaviour
+public class AppCarouselMenu : MonoBehaviour, IPrefLoader, IPrefSaver
 {
+    [SerializeField] private string _prefKey = "BlockingInfo";
+
     [SerializeField] private GameObject _menuPanel;
-    
     [SerializeField] private RectTransform _content;
     [SerializeField] private Dictionary<RectTransform, App> _icons;
     [SerializeField] private TMP_Text _appName;
@@ -20,7 +21,7 @@ public class AppCarouselMenu : MonoBehaviour
     [SerializeField] private float _scrollSmoothTime = 0.12f;
     [SerializeField] private float _edgePullDistance = 28f;
     [SerializeField] private float _edgeReturnTime = 0.15f;
-    
+
     [SerializeField] private string _swapAppSound;
     [SerializeField] private string _appOpenSound;
     [SerializeField] private string _appBlockedSound;
@@ -32,23 +33,27 @@ public class AppCarouselMenu : MonoBehaviour
     private float _edgeOffsetVelocity;
 
     private List<KeyValuePair<RectTransform, App>> _orderedIcons;
+    private SoundSystem _soundSystem;
+    private bool _isLoadingBlockingInfo;
 
+    public string PrefKey => _prefKey;
     public int SelectedIndex => _selectedIndex;
 
-    private SoundSystem _soundSystem;
-    
     [Inject]
     private void Construct(SoundSystem soundSystem)
     {
         _soundSystem = soundSystem;
     }
 
-    private void Awake()
+    private void Start()
     {
-        _orderedIcons = _orderedIcons = _icons
-            .OrderBy(pair => pair.Value.AppPriority)
-            .ToList();
-        
+        EnsureOrderedIcons();
+
+        foreach (KeyValuePair<RectTransform, App> pair in _orderedIcons)
+        {
+            pair.Value.BlockingStateChanged += OnBlockingStateChanged;
+        }
+
         _soundSystem.PlaySound(_appOpenSound);
 
         float firstY = (_orderedIcons.Count - 1) * _itemSpacing / 2f;
@@ -113,6 +118,7 @@ public class AppCarouselMenu : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             _menuPanel.SetActive(false);
+
             if (_orderedIcons[_selectedIndex].Value.IsBlocked == false)
             {
                 _orderedIcons[_selectedIndex].Value.Open();
@@ -154,18 +160,104 @@ public class AppCarouselMenu : MonoBehaviour
         }
     }
 
-    private void UpdateSelectedApp()
+    public void SetAppBlocked(App app, bool isBlocked)
     {
-        _soundSystem.PlaySound(_swapAppSound);
+        if (isBlocked)
+        {
+            app.Block();
+        }
+        else
+        {
+            app.Unblock();
+        }
+    }
+
+    public string GetSaveData()
+    {
+        EnsureOrderedIcons();
+
+        return new string(_orderedIcons
+            .Select(pair => pair.Value.IsBlocked ? '0' : '1')
+            .ToArray());
+    }
+
+    public void LoadData(string data)
+    {
+        EnsureOrderedIcons();
+
+        if (string.IsNullOrEmpty(data))
+        {
+            return;
+        }
+
+        _isLoadingBlockingInfo = true;
+
+        for (int i = 0; i < _orderedIcons.Count && i < data.Length; i++)
+        {
+            App app = _orderedIcons[i].Value;
+
+            if (data[i] == '1')
+            {
+                app.Unblock();
+            }
+            else
+            {
+                app.Block();
+            }
+        }
+
+        _isLoadingBlockingInfo = false;
+        UpdateSelectedApp(false);
+    }
+
+    private void OnBlockingStateChanged()
+    {
+        if (_isLoadingBlockingInfo)
+        {
+            return;
+        }
+
+        PlayerPrefs.SetString(PrefKey, GetSaveData());
+        PlayerPrefs.Save();
+
+        UpdateSelectedApp(false);
+    }
+
+    private void EnsureOrderedIcons()
+    {
+        _orderedIcons ??= _icons
+            .OrderBy(pair => pair.Value.AppPriority)
+            .ToList();
+    }
+
+    private void UpdateSelectedApp(bool playSound = true)
+    {
+        if (playSound)
+        {
+            _soundSystem.PlaySound(_swapAppSound);
+        }
 
         App app = _orderedIcons[_selectedIndex].Value;
         _appName.text = app.IsBlocked ? $"{app.Name} [CLOSED]" : app.Name;
 
         foreach (KeyValuePair<RectTransform, App> pair in _orderedIcons)
         {
-            Image image = pair.Value.AppIcon;
-            image.color = pair.Value.IsBlocked ? Color.gray * 0.5f : Color.white;
+            pair.Value.AppIcon.color = pair.Value.IsBlocked
+                ? Color.gray * 0.5f
+                : Color.white;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_orderedIcons == null)
+        {
+            return;
         }
 
+        foreach (KeyValuePair<RectTransform, App> pair in _orderedIcons)
+        {
+            pair.Value.BlockingStateChanged -= OnBlockingStateChanged;
+        }
     }
 }

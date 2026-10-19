@@ -17,8 +17,12 @@ public class App : MonoBehaviour
     [SerializeField] protected Button _closeButton;
     
     [SerializeField] private FakeLoading _fakeLoading;
+
+    [SerializeField] private App _app;
     
     public bool IsBlocked => _isBlocked;
+    
+    public event System.Action BlockingStateChanged;
 
     public virtual void Open()
     {
@@ -27,15 +31,27 @@ public class App : MonoBehaviour
         
         _fakeLoading.StartCoroutine(_fakeLoading.PlayLoading());
     }
-
+    
     public void Unblock()
     {
+        if (_isBlocked == false)
+        {
+            return;
+        }
+
         _isBlocked = false;
+        BlockingStateChanged?.Invoke();
     }
 
     public void Block()
     {
+        if (_isBlocked)
+        {
+            return;
+        }
+
         _isBlocked = true;
+        BlockingStateChanged?.Invoke();
     }
 
     public virtual void Close()
@@ -46,6 +62,11 @@ public class App : MonoBehaviour
         _closeButton.onClick.RemoveAllListeners();
 
         _fakeLoading.StartCoroutine(_fakeLoading.PlayLoading());
+
+        if (_app != null)
+        {
+            _app.Unblock();   
+        }
     }
 
     private void OnDestroy()

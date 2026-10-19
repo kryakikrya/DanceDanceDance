@@ -27,7 +27,7 @@ public class SongSO : ScriptableObject
         int beatCount = Mathf.CeilToInt(_duration * _bpm / 60f);
         List<int> beats = new List<int>();
 
-        int beat = Mathf.CeilToInt(6f * _bpm / 60f) - 1;
+        int beat = Mathf.CeilToInt(6f * _bpm / 60f);
 
         while (beat < beatCount)
         {

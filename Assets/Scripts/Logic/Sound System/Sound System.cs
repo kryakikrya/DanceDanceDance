@@ -3,6 +3,7 @@ using System.Threading;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System;
+using DG.Tweening;
 
 public class SoundSystem : IDisposable
 {
@@ -189,11 +190,38 @@ public class SoundSystem : IDisposable
     {
         AudioSource source = GetFreeSource();
 
-        float v = volume * UnityEngine.Random.Range(0.95f, 1.05f);
-        float p = UnityEngine.Random.Range(0.95f, 1.05f);
+        float pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+        float targetVolume = volume * UnityEngine.Random.Range(0.95f, 1.05f);
 
-        source.pitch = p;
-        source.PlayOneShot(clip, v);
+        source.pitch = pitch;
+        source.volume = 0f;
+        source.clip = clip;
+        source.Play();
+
+        float duration = clip.length / pitch;
+        float fadeDuration = duration * 0.05f;
+
+        DOTween.To(
+            () => source.volume,
+            value => source.volume = value,
+            targetVolume,
+            fadeDuration
+        );
+
+        DOVirtual.DelayedCall(duration - fadeDuration, () =>
+        {
+            DOTween.To(
+                () => source.volume,
+                value => source.volume = value,
+                0f,
+                fadeDuration
+            ).OnComplete(() =>
+            {
+                source.Stop();
+                source.volume = 1f;
+            });
+        });
+
         source.pitch = 1f;
     }
 

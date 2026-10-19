@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e8709a8507f818e85f77ae7fd64e5b, type: 3}
+  m_Name: Verity
+  m_EditorClassIdentifier: Assembly-CSharp::SongSO
+  _bpm: 126
+  _duration: 82
+  _beats: 0c00000017000000220000002d00000038000000430000004e00000059000000640000006f0000007a00000085000000900000009b000000a6000000i
+  _autoIntervalMain: 11
+  _autoIntervalSub: 9

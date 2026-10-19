@@ -1,12 +1,23 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class FakeLoading : MonoBehaviour
 {
     [SerializeField] private Image _image;
     [SerializeField] private float _duration = 0.3f;
     [SerializeField] private float _delay = 0.5f;
+
+    [SerializeField] private string _path = "Wakawaka";
+    
+    private SoundSystem _soundSystem;
+
+    [Inject]
+    private void Construct(SoundSystem soundSystem)
+    {
+        _soundSystem = soundSystem;
+    }
 
     private void OnEnable()
     {
@@ -20,7 +31,7 @@ public class FakeLoading : MonoBehaviour
         _image.fillOrigin = Random.Range(0, 4);
 
         yield return new WaitForSeconds(_delay);
-
+        _soundSystem.PlaySound(_path);
         float elapsed = 0f;
 
         while (elapsed < _duration)
