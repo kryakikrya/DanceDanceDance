@@ -84,6 +84,10 @@ public class ObstacleIcon : MonoBehaviour, IObstacleVisualization
     public void OnDestroy()
     {
         _movementTween?.Kill();
-        Destroy(gameObject);
+
+        if (gameObject != null)
+        {
+            Destroy(gameObject);   
+        }
     }
 }

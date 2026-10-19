@@ -18,6 +18,8 @@ public class ObstacleGeneration
     private SongClock _clock;
     
     private ObstaclesObjectCreator  _obstaclesObjectCreator;
+    
+    private (DanceState topState, DanceState bottomState) _last;
 
     public ObstacleGeneration(SongClock clock, ObstaclesObjectCreator obstaclesObjectCreator)
     {
@@ -75,18 +77,25 @@ public class ObstacleGeneration
 
     private void CreateObstacle(int index, float time)
     {
-        DanceState topState = (DanceState)Random.Range(
-            (int)DanceState.TopState1,
-            (int)DanceState.TopState3 + 1
-        );
-
-        DanceState bottomState = (DanceState)Random.Range(
-            (int)DanceState.BottomState1,
-            (int)DanceState.BottomState3 + 1
-        );
+        DanceState topState;
+        DanceState bottomState;
+        
+        do
+        {
+            topState = (DanceState)Random.Range(
+                (int)DanceState.TopState1,
+                (int)DanceState.TopState3 + 1
+            );
+            
+            bottomState = (DanceState)Random.Range(
+                (int)DanceState.BottomState1,
+                (int)DanceState.BottomState3 + 1
+            );
+        } while (topState == _last.topState || bottomState == _last.bottomState);
         
         Debug.Log($"Current Combination {topState} {bottomState}");
 
+        _last = (topState, bottomState);
         OnObstacleCreated?.Invoke(new Obstacle(index, topState, bottomState, time));
     }
     

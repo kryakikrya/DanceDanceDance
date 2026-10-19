@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StateDataSO
   state: 8
   _sprites:
-  - {fileID: 1509922577942152748, guid: d5ce39099cfec8e60a1005a1ca8593ef, type: 3}
+  - {fileID: 3197253611801895702, guid: cd4288051c81774b0896b27c55e44cf3, type: 3}
   _timeBetweenSprites: 5
-  _offset: {x: 0.4, y: 0.25}
+  _offset: {x: 0, y: -0.1}

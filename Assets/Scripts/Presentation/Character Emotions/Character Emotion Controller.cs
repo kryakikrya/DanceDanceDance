@@ -5,8 +5,6 @@ using Zenject;
 
 public class CharacterEmotionController : BodyPart
 {
-    [SerializeField] private float _changeEmotionColldown = 2f;
-    
     [SerializeField] private float _autoChangeFace = 3f;
     
     [SerializeField] private float _faceBack = 1f;
@@ -14,8 +12,6 @@ public class CharacterEmotionController : BodyPart
     [SerializeField] private float _hpPercentForFoolishFace = 50;
     
     [SerializeField] private Dictionary<DanceState, string> _emotionSounds = new Dictionary<DanceState, string>();
-
-    private float _timer = 0;
     
     private SoundSystem _soundSystem;
     
@@ -29,88 +25,64 @@ public class CharacterEmotionController : BodyPart
         _healthSystem = healthSystem;
     }
 
-    private void Start()
-    {
-        _timer = _changeEmotionColldown;
-    }
-
-    private void Update()
-    {
-        _timer += Time.deltaTime;
-
-        if (_timer >= _autoChangeFace)
-        {
-            ChooseDefaultEmotion();
-        }
-    }
-
     public void PlayEmotion(CheckResultType result)
     {
         switch (result)
         {
             case CheckResultType.PerfectTime:
-                PlayEmotion(DanceState.PerfectFace, true);
+                PlayEmotion(DanceState.PerfectFace);
                 break;
             case CheckResultType.NiceTime:
-                PlayEmotion(DanceState.NiceFace, true);
+                PlayEmotion(DanceState.NiceFace);
                 break;
             case CheckResultType.GoodTime:
-                PlayEmotion(DanceState.GoodFace, true);
+                PlayEmotion(DanceState.GoodFace);
                 break;
             case CheckResultType.BadTime:
-                PlayEmotion(DanceState.BadFace, true);
+                PlayEmotion(DanceState.BadFace);
                 break;
             case CheckResultType.WrongCombination:
-                PlayEmotion(DanceState.AngryFace, true);
+                PlayEmotion(DanceState.AngryFace);
                 break;
             case CheckResultType.TooEarly:
-                PlayEmotion(DanceState.AngryFace, true);
+                PlayEmotion(DanceState.AngryFace);
                 break;
             case CheckResultType.TooLate:
-                PlayEmotion(DanceState.AngryFace, true);
+                PlayEmotion(DanceState.AngryFace);
                 break;
         }
     }
 
     private void ChooseDefaultEmotion(bool force = false)
     {
-        Debug.Log("Choose Default Emotion");
-        
         if (_healthSystem.CurrentHealth / _healthSystem.MaxHealth < _hpPercentForFoolishFace / 100)
         {
             if (DanceState.FoolishFace != _currentState)
             {
-                PlayEmotion(DanceState.FoolishFace, force);
+                PlayEmotion(DanceState.FoolishFace);
             }
         }
         else
         {
             if (DanceState.FoolishFace != _currentState)
             {
-                PlayEmotion(DanceState.DefaultFace, force);
+                PlayEmotion(DanceState.DefaultFace);
             }
         }
     }
 
-    public void PlayEmotion(DanceState state, bool force = false)
+    public void PlayEmotion(DanceState state)
     {
-        if (_timer >= _changeEmotionColldown || force)
-        {
-            Debug.Log($"Пытаюсь поменять на {state}");
             ChangeState(state);
-            _timer = 0;
             _soundSystem.PlaySound(_emotionSounds[state]);
             
-            StartCoroutine(FaceBack(_faceBack, force));
-        }
+            StartCoroutine(FaceBack(_faceBack));
     }
     
-    private System.Collections.IEnumerator FaceBack(float delay, bool force = false)
+    private System.Collections.IEnumerator FaceBack(float delay)
     {
         yield return new WaitForSeconds(delay);
         
-        _timer = 0;
-
-        ChooseDefaultEmotion(force);
+        ChooseDefaultEmotion();
     }
 }

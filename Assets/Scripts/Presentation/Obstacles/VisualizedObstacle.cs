@@ -107,5 +107,10 @@ public class VisualizedObstacle : MonoBehaviour, IObstacleVisualization
     {
         _movementTween?.Kill();
         _scaleTween?.Kill();
+        
+        if (gameObject != null)
+        {
+            Destroy(gameObject);   
+        }
     }
 }

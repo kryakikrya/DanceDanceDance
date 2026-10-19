@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73e8709a8507f818e85f77ae7fd64e5b, type: 3}
-  m_Name: MahouSongSO
+  m_Name: NikSongSO
   m_EditorClassIdentifier: Assembly-CSharp::SongSO
-  _bpm: 120
-  _duration: 6
-  _beats: 0a000000i
+  _bpm: 130
+  _duration: 105
+  _beats: 0c0000001800000024000000300000003800000044000000500000005c00000068000000740000007c000000840000008e00000096000000a4000000b0000000bc000000c8000000d4000000e0000000i
+  _autoIntervalMain: 12
+  _autoIntervalSub: 8

@@ -34,8 +34,8 @@ public class SoundSystem : IDisposable
         _musicA = _audioSources[0];
         _musicB = _audioSources[1];
 
-        _musicA.loop = true;
-        _musicB.loop = true;
+        _musicA.loop = false;
+        _musicB.loop = false;
 
         _musicA.volume = 1f;
         _musicB.volume = 0f;
@@ -170,7 +170,6 @@ public class SoundSystem : IDisposable
         
         if (clip is null)
         {
-            Debug.LogAssertion($"AudioClip not found: {clipKey}");
             return;
         }
 
