@@ -35,6 +35,7 @@ public class App : MonoBehaviour
 
     public virtual void Close()
     {
+        Debug.Log($"App closed {_appPanel} {_menuPanel} {_closeButton}");
         _appPanel.SetActive(false);
         _menuPanel.SetActive(true);
         _closeButton.onClick.RemoveAllListeners();

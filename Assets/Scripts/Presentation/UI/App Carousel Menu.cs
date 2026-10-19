@@ -110,7 +110,7 @@ public class AppCarouselMenu : MonoBehaviour
             }
         }
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             _menuPanel.SetActive(false);
             if (_orderedIcons[_selectedIndex].Value.IsBlocked == false)

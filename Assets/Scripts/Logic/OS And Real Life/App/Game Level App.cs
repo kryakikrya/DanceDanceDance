@@ -16,8 +16,10 @@ public class GameLevelApp : App
     
     private SoundSystem _soundSystem;
     
+    private HealthSystem _healthSystem;
+    
     [Inject]
-    private void Construct(GameEntryPoint entry, ObstacleGeneration generation, PlayerActions playerActions, ScoreSystem scoreSystem, SoundSystem soundSystem)
+    private void Construct(GameEntryPoint entry, ObstacleGeneration generation, PlayerActions playerActions, ScoreSystem scoreSystem, SoundSystem soundSystem, HealthSystem system)
     {
         Debug.Log($"Game Level App Construct {entry}");
         
@@ -30,6 +32,8 @@ public class GameLevelApp : App
         _playerActions = playerActions;
         
         _soundSystem = soundSystem;
+        
+        _healthSystem = system;
     }
 
     public override void Open()
@@ -38,15 +42,21 @@ public class GameLevelApp : App
         
         Debug.Log($"Open! {_entry}, {_startSongSO.name}, {_startSong}");
         _entry.StartGame(_startSong, _startSongSO);
+        
+        _healthSystem.OnPlayerDead += Close;
     }
 
     public override void Close()
     {
+        Debug.Log($"Close! {_entry}, {_startSongSO.name}, {_startSong}");
+        
+        base.Close();
+        
         _obstacleGeneration.Stop();
         _playerActions.Disable();
         _scoreSystem.Reset();
         _soundSystem.StopAllSounds();
         
-        base.Close();
+        _healthSystem.OnPlayerDead -= Close;
     }
 }
