@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FastTest
   m_EditorClassIdentifier: Assembly-CSharp::SongSO
   _bpm: 120
-  _duration: 16
-  _beats: 0e00000019000000i
+  _duration: 9
+  _beats: 0e000000i
   _autoIntervalMain: 6
   _autoIntervalSub: 5

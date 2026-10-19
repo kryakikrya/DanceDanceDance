@@ -24,7 +24,7 @@ public class VolumeChanging : MonoBehaviour, IPrefLoader, IPrefSaver, IPointerUp
         _soundSystem = soundSystem;
     }
 
-    private void Awake()
+    private void Sync()
     {
         _mixerGroup.audioMixer.GetFloat(_volumeParameter, out float volumeDb);
         float defaultValue = Mathf.Pow(10f, volumeDb / 20f);
@@ -81,6 +81,8 @@ public class VolumeChanging : MonoBehaviour, IPrefLoader, IPrefSaver, IPointerUp
 
     public string GetSaveData()
     {
+        Sync();
+        
         return PlayerPrefs.GetFloat(PrefKey).ToString(CultureInfo.InvariantCulture);
     }
 

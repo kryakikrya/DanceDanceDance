@@ -68,12 +68,7 @@ public class SoundSystem : IDisposable
     {
         if (clip == null)
         {
-            Debug.LogAssertion("Music clip == null");
-            return;
-        }
-
-        if (_currentMusic == clip)
-        {
+            Debug.LogWarning("Music clip == null");
             return;
         }
 

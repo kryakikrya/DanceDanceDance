@@ -14,7 +14,11 @@ public class SubsciptedBodyPart : BodyPart
 
     private void OnEnable()
     {
-        _animator = new CustomAnimator(_spriteRenderer);
+        if (_animator == null)
+        {
+            _animator = new CustomAnimator(_spriteRenderer);   
+        }
+        
         ChangeState(_startState);
         
         foreach (var binding in _bindings)
@@ -39,6 +43,7 @@ public class SubsciptedBodyPart : BodyPart
             subscription.Action.performed -= subscription.Callback;
         }
 
+        _animator.Dispose();
         _subscriptions.Clear();
     }
 }

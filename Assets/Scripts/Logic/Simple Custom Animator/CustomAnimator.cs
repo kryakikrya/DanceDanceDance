@@ -26,6 +26,7 @@ public class CustomAnimator : IDisposable
             
             while (!_cts.Token.IsCancellationRequested)
             {
+                Debug.Log($"Меняю спрайт на {animation[index].name}");
                 _spriteRenderer.sprite = animation[index];
                 index++;
 
@@ -48,7 +49,8 @@ public class CustomAnimator : IDisposable
         if (_cts != null)
         {
             _cts.Cancel();
-            _cts.Dispose();   
+            _cts.Dispose();  
+            _cts = new CancellationTokenSource();
         }
     }
 }

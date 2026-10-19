@@ -51,5 +51,7 @@ public class HealthSystem
         Debug.Log("OnPLayerDead");
         
         OnPlayerDead?.Invoke();
+
+        ResetHealth();
     }
 }

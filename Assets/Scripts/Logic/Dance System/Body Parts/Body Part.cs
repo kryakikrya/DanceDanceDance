@@ -32,16 +32,18 @@ public class BodyPart : MonoBehaviour
 
     private void OnEnable()
     {
-        _animator = new CustomAnimator(_spriteRenderer);
+        if (_animator == null)
+        {
+            _animator = new CustomAnimator(_spriteRenderer);   
+        }
         
         ChangeState(_startState);
     }
 
     private void OnDisable()
     {
+        _animator.Dispose();
         _animator = null;
-        
-        ChangeState(_startState);
     }
 
     public void ChangeState(DanceState state)
