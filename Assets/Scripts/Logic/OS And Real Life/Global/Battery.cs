@@ -1,8 +1,9 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Battery
+public class Battery : IDisposable
 {
     private Image[] _segments;
     private Tween _batteryTween;
@@ -13,7 +14,11 @@ public class Battery
     private const float BlinkThreshold = 0.04f;
     private const float BlinkDuration = 0.2f;
 
+    private bool _isDead;
+
     public float Charge { get; private set; } = 1f;
+
+    public event Action OnBatteryDead;
 
     public Battery(ReallifeClock clock, Image[] segments)
     {
@@ -51,6 +56,13 @@ public class Battery
                 _blinkTweens[i]?.Kill();
                 _blinkTweens[i] = null;
                 _segments[i].enabled = false;
+
+                if (i == _segments.Length - 1 && _isDead == false)
+                {
+                    _isDead = true;
+                    OnBatteryDead?.Invoke();
+                }
+
                 continue;
             }
 
