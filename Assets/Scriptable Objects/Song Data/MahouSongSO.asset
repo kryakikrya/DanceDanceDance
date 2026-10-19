@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MahouSongSO
   m_EditorClassIdentifier: Assembly-CSharp::SongSO
   _bpm: 120
-  _duration: 14
-  _beats: 0a000000140000001b000000i
+  _duration: 6
+  _beats: 0a000000i

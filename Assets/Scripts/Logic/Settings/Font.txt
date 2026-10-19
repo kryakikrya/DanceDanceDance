@@ -1,0 +1,225 @@
+{
+  "frames": [
+    {
+      "filename": "0",
+      "frame": {
+        "x": 7,
+        "y": 67,
+        "w": 20,
+        "h": 31
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 18,
+        "h": 29
+      },
+      "sourceSize": {
+        "w": 18,
+        "h": 29
+      }
+    },
+    {
+      "filename": "1",
+      "frame": {
+        "x": 2,
+        "y": 35,
+        "w": 13,
+        "h": 28
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 13,
+        "h": 28
+      },
+      "sourceSize": {
+        "w": 13,
+        "h": 28
+      }
+    },
+    {
+      "filename": "2",
+      "frame": {
+        "x": 19,
+        "y": 35,
+        "w": 16,
+        "h": 28
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 28
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 28
+      }
+    },
+    {
+      "filename": "3",
+      "frame": {
+        "x": 39,
+        "y": 35,
+        "w": 15,
+        "h": 28
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 15,
+        "h": 28
+      },
+      "sourceSize": {
+        "w": 15,
+        "h": 28
+      }
+    },
+    {
+      "filename": "4",
+      "frame": {
+        "x": 56,
+        "y": 35,
+        "w": 18,
+        "h": 28
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 18,
+        "h": 28
+      },
+      "sourceSize": {
+        "w": 18,
+        "h": 28
+      }
+    },
+    {
+      "filename": "5",
+      "frame": {
+        "x": 78,
+        "y": 35,
+        "w": 16,
+        "h": 28
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 28
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 28
+      }
+    },
+    {
+      "filename": "6",
+      "frame": {
+        "x": 96,
+        "y": 35,
+        "w": 16,
+        "h": 28
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 28
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 28
+      }
+    },
+    {
+      "filename": "7",
+      "frame": {
+        "x": 114,
+        "y": 35,
+        "w": 16,
+        "h": 28
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 28
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 28
+      }
+    },
+    {
+      "filename": "8",
+      "frame": {
+        "x": 132,
+        "y": 34,
+        "w": 15,
+        "h": 28
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 15,
+        "h": 28
+      },
+      "sourceSize": {
+        "w": 15,
+        "h": 28
+      }
+    },
+    {
+      "filename": "9",
+      "frame": {
+        "x": 149,
+        "y": 34,
+        "w": 16,
+        "h": 28
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 28
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 28
+      }
+    }
+  ],
+  "meta": {
+    "app": "Unity",
+    "version": "1.0",
+    "image": "Signs.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 175,
+      "h": 100
+    },
+    "scale": "1"
+  }
+}

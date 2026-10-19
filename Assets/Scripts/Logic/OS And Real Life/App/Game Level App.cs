@@ -12,8 +12,12 @@ public class GameLevelApp : App
     
     private PlayerActions _playerActions;
     
+    private ScoreSystem _scoreSystem;
+    
+    private SoundSystem _soundSystem;
+    
     [Inject]
-    private void Construct(GameEntryPoint entry, ObstacleGeneration generation, PlayerActions playerActions)
+    private void Construct(GameEntryPoint entry, ObstacleGeneration generation, PlayerActions playerActions, ScoreSystem scoreSystem, SoundSystem soundSystem)
     {
         Debug.Log($"Game Level App Construct {entry}");
         
@@ -21,7 +25,11 @@ public class GameLevelApp : App
         
         _obstacleGeneration = generation;
         
+        _scoreSystem = scoreSystem;
+        
         _playerActions = playerActions;
+        
+        _soundSystem = soundSystem;
     }
 
     public override void Open()
@@ -34,8 +42,11 @@ public class GameLevelApp : App
 
     public override void Close()
     {
-        base.Close();
         _obstacleGeneration.Stop();
         _playerActions.Disable();
+        _scoreSystem.Reset();
+        _soundSystem.StopAllSounds();
+        
+        base.Close();
     }
 }

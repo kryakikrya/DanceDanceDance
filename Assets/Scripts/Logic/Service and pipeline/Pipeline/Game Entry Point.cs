@@ -107,7 +107,7 @@ public class GameEntryPoint : IDisposable
     {
         Debug.Log($"Starting game {_healthSystem}, ");
         
-        _songClock.SetIsPlaying(true);
+        _songClock.SetIsPlaying(true, startSongSO);
         _healthSystem.ResetHealth();
         _playerActions.Enable();
         

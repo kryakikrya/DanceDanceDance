@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using UnityEngine;
 using Zenject;
@@ -9,18 +10,33 @@ public class Win : MonoBehaviour, IPrefLoader, IPrefSaver
     private ScoreSystem _scoreSystem;
     
     private HealthSystem _healthSystem;
+    
+    private SongClock _songClock;
 
     public string PrefKey => "TotalScore";
 
     [Inject]
-    private void Construct(ScoreSystem scoreSystem, HealthSystem healthSystem)
+    private void Construct(ScoreSystem scoreSystem, HealthSystem healthSystem, SongClock songClock)
     {
         _scoreSystem = scoreSystem;
+        
+        _healthSystem = healthSystem;
+        
+        _songClock = songClock;
     }
 
     private void OnEnable()
     {
         _winPanel.SetActive(false);
+
+        _songClock.OnSongFinished += WinGame;
+    }
+
+    private void OnDisable()
+    {
+        _winPanel.SetActive(false);
+        
+        _songClock.OnSongFinished -= WinGame;
     }
 
     public void WinGame()

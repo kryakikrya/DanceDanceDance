@@ -6,6 +6,8 @@ using System;
 
 public class SoundSystem : IDisposable
 {
+    private const float SoundVolumeRecoveryDuration = 0.1f;
+    
     private readonly CMS _cms;
     private readonly List<AudioSource> _audioSources;
 
@@ -125,16 +127,12 @@ public class SoundSystem : IDisposable
         }
 
         float volume = GetSoundVolume();
-
         PlayOneShot(clip, volume);
 
-        if (_isSoundVolumeRecovering == false)
-        {
-            _isSoundVolumeRecovering = true;
-            _soundVolumeRecoveryStartTime = Time.unscaledTime;
-        }
+        _isSoundVolumeRecovering = true;
+        _soundVolumeRecoveryStartTime = Time.unscaledTime;
     }
-    
+
     private float GetSoundVolume()
     {
         if (_isSoundVolumeRecovering == false)
@@ -143,7 +141,7 @@ public class SoundSystem : IDisposable
         }
 
         float elapsedTime = Time.unscaledTime - _soundVolumeRecoveryStartTime;
-        float volume = Mathf.Floor(elapsedTime * 100f) / 100f;
+        float volume = Mathf.Clamp01(elapsedTime / SoundVolumeRecoveryDuration);
 
         if (volume >= 1f)
         {
@@ -151,7 +149,7 @@ public class SoundSystem : IDisposable
             return 1f;
         }
 
-        return Mathf.Clamp01(volume);
+        return volume;
     }
 
     public void StopMusic()
@@ -181,8 +179,9 @@ public class SoundSystem : IDisposable
 
     public void StopAllSounds()
     {
-        for (int i = 2; i < _audioSources.Count; i++)
+        for (int i = 0; i < _audioSources.Count; i++)
         {
+            Debug.Log("StopAllSounds " + _audioSources[i].name);
             if (_audioSources[i] == null)
             {
                 continue;

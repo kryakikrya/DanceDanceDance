@@ -10,6 +10,11 @@ public class SongClock : MonoBehaviour
     private float _songTimer = 0;
     
     public float SongTime => _songTimer;
+    
+    private SongSO _song;
+    public SongSO Song => _song;
+    
+    public event Action OnSongFinished;
 
     private void Update()
     {
@@ -17,6 +22,11 @@ public class SongClock : MonoBehaviour
         {
             _songTimer += Time.deltaTime;
             //Debug.Log(_songTimer);
+            
+            if (HasReached(_song.Duration))
+            {
+                OnSongFinished?.Invoke();
+            }
         }
     }
 
@@ -25,9 +35,11 @@ public class SongClock : MonoBehaviour
         _songTimer = 0;
     }
 
-    public void SetIsPlaying(bool isPlaying)
+    public void SetIsPlaying(bool isPlaying, SongSO SO)
     {
         Debug.Log($"Is playing is {isPlaying}");
+
+        _song = SO;
         
         _isPlaying = isPlaying;
     }

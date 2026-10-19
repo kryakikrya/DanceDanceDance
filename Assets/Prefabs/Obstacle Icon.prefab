@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3740650431812681005}
   - component: {fileID: -178525855939466920}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2691982390876267627}
   - component: {fileID: 6372161440857786127}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,8 +126,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1415275861
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7188043445224178021}
   - component: {fileID: 8644921758493818877}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,8 +218,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1415275861
+  m_SortingLayer: 1
   m_SortingOrder: 99
   m_MaskInteraction: 0
   m_Sprite: {fileID: 6783381744408990887, guid: 00e0beaab9c59ffa69de3216830bd699, type: 3}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8012481879394417222}
   - component: {fileID: 3560847519413624411}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1569730982844098969}
   - component: {fileID: 7106762315599078208}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 2077401534702516489}
   - component: {fileID: 7327169000647036064}
   - component: {fileID: 3167277809494087973}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,8 +178,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1415275861
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_MaskInteraction: 2
   m_Sprite: {fileID: 8189444086344419290, guid: d5ce39099cfec8e60a1005a1ca8593ef, type: 3}
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 4007503135649471088}
   - component: {fileID: 6264671799606810192}
   - component: {fileID: 4190709144768809964}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,8 +330,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1415275861
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5611852971218203902, guid: 147106595893cb456b1816a418f79872, type: 3}
@@ -414,7 +414,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1186789032904304397}
   - component: {fileID: 6173588013939706534}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player Top (Hands)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 4668451103626686542}
   - component: {fileID: 5933046904005991268}
   - component: {fileID: 8113923833480580193}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -534,8 +534,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1415275861
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -3531671097495803833, guid: 147106595893cb456b1816a418f79872, type: 3}
@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 7383429342673494611}
   - component: {fileID: 4232074805592487860}
   - component: {fileID: 2683710971512760166}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -686,8 +686,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1415275861
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1961646256922278657, guid: 147106595893cb456b1816a418f79872, type: 3}
@@ -770,7 +770,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1443523872574193930}
   - component: {fileID: 4123955064399738406}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -822,7 +822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1897503188988232375}
   - component: {fileID: 7998050788656590732}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -873,7 +873,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8887633686088169461}
   - component: {fileID: 67329091373632518}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -940,8 +940,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1415275861
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
@@ -964,7 +964,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 106491133631428874}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
