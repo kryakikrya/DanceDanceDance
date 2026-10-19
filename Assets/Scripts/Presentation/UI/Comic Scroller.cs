@@ -39,7 +39,8 @@ public class ComicScroller : MonoBehaviour
         SpriteRenderer renderer = Instantiate(
             _rendererPrefab,
             page.Value,
-            Quaternion.identity
+            Quaternion.identity,
+            transform  
         );
 
         renderer.sprite = page.Key;
