@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f6ce3107eabbbe95a5691dd24179720, type: 3}
-  m_Name: Default State
+  m_Name: Good State Bear
   m_EditorClassIdentifier: Assembly-CSharp::StateDataSO
-  state: 6
+  state: 9
   _sprites:
-  - {fileID: -8896345404684820225, guid: 0d0cfb31e6343d0ed8057e793f2fd923, type: 3}
+  - {fileID: -1946210645116371578, guid: 611831badd74d2bba8f5ee11e55f8eed, type: 3}
   _timeBetweenSprites: 5
-  _offset: {x: 0, y: 0}
+  _offset: {x: 0, y: -0.05}

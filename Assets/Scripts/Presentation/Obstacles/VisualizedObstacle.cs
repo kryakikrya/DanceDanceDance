@@ -6,12 +6,14 @@ public class VisualizedObstacle : MonoBehaviour, IObstacleVisualization
 {
     [field: SerializeField] public PlayerMaskablePart Top { get; private set; }
     [field: SerializeField] public PlayerMaskablePart Bottom { get; private set; }
-    
+
     [SerializeField] private int _layer = 20;
     [SerializeField] private float _sizeFrom;
     [SerializeField] private float _sizeTo;
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private SpriteRenderer _spriteRenderer2;
+
     private Coroutine _animationCoroutine;
     private Tween _movementTween;
     private Tween _scaleTween;
@@ -40,7 +42,7 @@ public class VisualizedObstacle : MonoBehaviour, IObstacleVisualization
             AnimationCoroutine(spawnPosition, playerPosition, timeAfter, duration)
         );
     }
-    
+
     private System.Collections.IEnumerator AnimationCoroutine(
         Vector2 spawnPosition,
         Vector2 playerPosition,
@@ -51,6 +53,7 @@ public class VisualizedObstacle : MonoBehaviour, IObstacleVisualization
         transform.localScale = Vector3.one * _sizeFrom;
 
         float initialAlpha = _spriteRenderer.color.a;
+
         _spriteRenderer.color = new Color(
             _spriteRenderer.color.r,
             _spriteRenderer.color.g,
@@ -58,8 +61,15 @@ public class VisualizedObstacle : MonoBehaviour, IObstacleVisualization
             0f
         );
 
-        _spriteRenderer.DOFade(initialAlpha, 0.5f)
-            .SetEase(Ease.Linear);
+        _spriteRenderer2.color = new Color(
+            _spriteRenderer2.color.r,
+            _spriteRenderer2.color.g,
+            _spriteRenderer2.color.b,
+            0f
+        );
+
+        _spriteRenderer.DOFade(initialAlpha, 0.5f).SetEase(Ease.Linear);
+        _spriteRenderer2.DOFade(initialAlpha, 0.5f).SetEase(Ease.Linear);
 
         Vector2 direction = (playerPosition - spawnPosition).normalized;
         float distance = Vector2.Distance(spawnPosition, playerPosition);
@@ -72,14 +82,16 @@ public class VisualizedObstacle : MonoBehaviour, IObstacleVisualization
                         (_sizeTo - _sizeFrom) * (totalDuration / duration);
 
         _movementTween = DOTween.Sequence()
-            .Append(transform.DOMove(endPosition, totalDuration)
-                .SetEase(Ease.Linear))
-            .Insert(duration, _spriteRenderer.DOFade(0f, timeAfter)
-                .SetEase(Ease.Linear))
-            .InsertCallback(duration, () => _spriteRenderer.sortingOrder = _layer);
+            .Append(transform.DOMove(endPosition, totalDuration).SetEase(Ease.Linear))
+            .Insert(duration, _spriteRenderer.DOFade(0f, timeAfter).SetEase(Ease.Linear))
+            .Insert(duration, _spriteRenderer2.DOFade(0f, timeAfter).SetEase(Ease.Linear))
+            .InsertCallback(duration, () =>
+            {
+                _spriteRenderer.sortingOrder = _layer;
+                _spriteRenderer2.sortingOrder = _layer - 1;
+            });
 
-        _scaleTween = transform.DOScale(endSize, totalDuration)
-            .SetEase(Ease.Linear);
+        _scaleTween = transform.DOScale(endSize, totalDuration).SetEase(Ease.Linear);
 
         while (_movementTween.IsActive() && !_movementTween.IsComplete())
         {
@@ -95,6 +107,5 @@ public class VisualizedObstacle : MonoBehaviour, IObstacleVisualization
     {
         _movementTween?.Kill();
         _scaleTween?.Kill();
-        Destroy(gameObject);
     }
 }

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f6ce3107eabbbe95a5691dd24179720, type: 3}
-  m_Name: Angry State
+  m_Name: Angry State Bear
   m_EditorClassIdentifier: Assembly-CSharp::StateDataSO
   state: 12
   _sprites:
-  - {fileID: 6475703682321822271, guid: 83fce97bd203f623281e777c794bacb3, type: 3}
+  - {fileID: -9199899474692821188, guid: 611831badd74d2bba8f5ee11e55f8eed, type: 3}
   _timeBetweenSprites: 5
-  _offset: {x: 0, y: 0}
+  _offset: {x: 0, y: -0.05}

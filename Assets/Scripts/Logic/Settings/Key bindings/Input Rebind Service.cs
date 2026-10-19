@@ -10,21 +10,6 @@ public class InputRebindService : MonoBehaviour, IPrefSaver, IPrefLoader
 
     private InputAction Action => _actionReference.action;
 
-    private void Awake()
-    {
-        if (_actionReference == null)
-        {
-            Debug.LogError("[Rebind] Action Reference is not assigned.", this);
-            return;
-        }
-
-        string data = PlayerPrefs.GetString(PrefKey, string.Empty);
-
-        Debug.Log($"[Rebind] Loading '{Action.name}', key='{PrefKey}', saved path='{data}'", this);
-
-        LoadData(data);
-    }
-
     public string GetSaveData()
     {
         return Action.bindings[0].overridePath ?? string.Empty;

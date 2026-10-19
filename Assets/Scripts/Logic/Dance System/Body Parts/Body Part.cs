@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,19 +14,36 @@ public class BodyPart : MonoBehaviour
     
     public DanceState CurrentState => _currentState;
     
+    public Sprite Sprite => _spriteRenderer.sprite;
+    
     protected CustomAnimator _animator;
     
     private Vector2 _basePosition;
 
+
     private void Awake()
+    {
+        if (_basePosition == Vector2.zero)
+        {
+            Debug.Log($"{_spriteRenderer.transform.localPosition}");
+            _basePosition = _spriteRenderer.transform.localPosition;
+        }
+    }
+
+    private void OnEnable()
     {
         _animator = new CustomAnimator(_spriteRenderer);
         
-        _basePosition =  _spriteRenderer.transform.localPosition;
+        ChangeState(_startState);
+    }
+
+    private void OnDisable()
+    {
+        _animator = null;
         
         ChangeState(_startState);
     }
-    
+
     public void ChangeState(DanceState state)
     {
         Debug.Log($"Changing state to {state}");
@@ -51,15 +69,35 @@ public class BodyPart : MonoBehaviour
 
     public virtual void ChangeState(StateDataSO state)
     {
-        Debug.Log($"Changing state to {state.State}");
+        Debug.Log($"Changing state to {state.State}. {state.name} {state.Sprites[0]}");
         
         _currentState = state.State;
+        
+        Debug.Log($"Changing state to {_basePosition} {state.Offset}");
         _spriteRenderer.transform.localPosition = _basePosition + state.Offset;
+        
         if (_animator == null)
         {
             _animator = new CustomAnimator(_spriteRenderer);
         }
         
         _animator.PlayAnimation(state.Sprites, state.TimeBetweenSprites).Forget();
+    }
+    
+    public void SwapSprites(List<Binding> bindings)
+    {
+        Debug.Log($"Swaping sprites for {bindings.Count} bindings");
+
+        if (_basePosition == Vector2.zero)
+        {
+            Debug.Log($"{_spriteRenderer.transform.localPosition}");
+            _basePosition = _spriteRenderer.transform.localPosition;
+        }
+        
+        _bindings = bindings;
+        
+        _startState = _bindings[0].StateData;
+        
+        ChangeState(_startState);
     }
 }
