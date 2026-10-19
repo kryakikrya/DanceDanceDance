@@ -40,16 +40,24 @@ public class ObstaclesObjectCreator : MonoBehaviour
     {
         _checkCombination.OnObstacleCreated += CreateObstacle;
         _checkCombination.OnObstacleDestroyed += DeleteObstacle;
+
+        if (_cts is null)
+        {
+            _cts = new CancellationTokenSource();
+        }
     }
 
     private void OnDisable()
     {
         _checkCombination.OnObstacleCreated -= CreateObstacle;
         _checkCombination.OnObstacleDestroyed -= DeleteObstacle;
-        
-        _cts.Cancel();
-        _cts.Dispose();
-        _cts = null;
+
+        if (_cts != null)
+        {
+            _cts.Cancel();
+            _cts.Dispose();
+            _cts = null;   
+        }
 
         DeleteAll();
     }
@@ -123,7 +131,12 @@ public class ObstaclesObjectCreator : MonoBehaviour
     {
         foreach (KeyValuePair<int, (IObstacleVisualization, IObstacleVisualization)> obstacle in _obstacles)
         {
-            DeleteObstacle(obstacle.Key);
+            obstacle.Value.Item1.LifetimeEnded -= DeleteObstacle;
+            obstacle.Value.Item1.OnDestroy();
+            obstacle.Value.Item2.LifetimeEnded  -= DeleteObstacle;
+            obstacle.Value.Item2.OnDestroy();
         }
+        
+        _obstacles.Clear();
     }
 }

@@ -41,6 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Videogame Layer
+    uniqueID: 2879691435
+    locked: 0
   - name: Real Life Layer
     uniqueID: 3882374199
     locked: 0
