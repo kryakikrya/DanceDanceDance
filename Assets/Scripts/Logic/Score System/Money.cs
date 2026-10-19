@@ -10,13 +10,13 @@ public class Money : IPrefLoader, IPrefSaver
 
     public int GetMoney()
     {
-        return PlayerPrefs.GetInt(PrefKey);
+        return Mathf.RoundToInt(PlayerPrefs.GetFloat(PrefKey, 0));
     }
 
     public void ChangeMoney(int amount)
     {
-        PlayerPrefs.SetInt(PrefKey, GetMoney() + amount);
-        PlayerPrefs.Save();
+        int current = GetMoney() + amount;
+        LoadData(current.ToString(CultureInfo.InvariantCulture));
 
         OnMoneyChanged?.Invoke(GetMoney());
     }
@@ -28,7 +28,7 @@ public class Money : IPrefLoader, IPrefSaver
 
     public void LoadData(string data)
     {
-        PlayerPrefs.SetInt(PrefKey, int.Parse(data, CultureInfo.InvariantCulture));
+        PlayerPrefs.SetFloat(PrefKey, float.Parse(data, CultureInfo.InvariantCulture));
         PlayerPrefs.Save();
     }
 }

@@ -16,9 +16,12 @@ public class GameSaveLoader
     {
         foreach (IPrefLoader loader in _loaders)
         {
-            string data = PlayerPrefs.GetFloat(loader.PrefKey)
-                .ToString(CultureInfo.InvariantCulture);
+            if (!PlayerPrefs.HasKey(loader.PrefKey))
+            {
+                continue;
+            }
 
+            string data = ((IPrefSaver)loader).GetSaveData();
             loader.LoadData(data);
         }
     }

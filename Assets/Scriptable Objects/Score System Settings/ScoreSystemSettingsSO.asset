@@ -27,5 +27,5 @@ MonoBehaviour:
     value: 5
   - key: 3
     value: 15
-  _healthToScore: 2
+  _healthToScore: 5
   _combinationModifier: 0.05

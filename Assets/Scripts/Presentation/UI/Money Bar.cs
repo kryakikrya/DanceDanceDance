@@ -27,6 +27,7 @@ public class MoneyBar : MonoBehaviour
 
     private void UpdateMoney(int amount)
     {
+        Debug.Log($"{_money.GetMoney()} - сейчас денег");
         _moneyText.text = amount.ToString();
     }
 }

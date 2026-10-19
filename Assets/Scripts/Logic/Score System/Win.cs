@@ -14,6 +14,8 @@ public class Win : MonoBehaviour, IPrefLoader, IPrefSaver
     private SongClock _songClock;
 
     public string PrefKey => "TotalScore";
+    
+    private bool _won = false;
 
     [Inject]
     private void Construct(ScoreSystem scoreSystem, HealthSystem healthSystem, SongClock songClock)
@@ -28,6 +30,8 @@ public class Win : MonoBehaviour, IPrefLoader, IPrefSaver
     private void OnEnable()
     {
         _winPanel.SetActive(false);
+        
+        _won = false;
 
         _songClock.OnSongFinished += WinGame;
     }
@@ -41,15 +45,21 @@ public class Win : MonoBehaviour, IPrefLoader, IPrefSaver
 
     public void WinGame()
     {
-        _healthSystem.ResetHealth();
+        if (!_won)
+        {
+            _won =  true;
+            _healthSystem.ResetHealth();
         
-        float totalScore = PlayerPrefs.GetFloat(PrefKey);
-        totalScore += _scoreSystem.Score;
+            float totalScore = PlayerPrefs.GetFloat(PrefKey);
+            totalScore += _scoreSystem.Score;
+        
+            Debug.Log($"Updating total score to {totalScore} pref = {PrefKey}");
 
-        PlayerPrefs.SetFloat(PrefKey, totalScore);
-        PlayerPrefs.Save();
+            PlayerPrefs.SetFloat(PrefKey, totalScore);
+            PlayerPrefs.Save();
 
-        _winPanel.SetActive(true);
+            _winPanel.SetActive(true);   
+        }
     }
 
     public string GetSaveData()
