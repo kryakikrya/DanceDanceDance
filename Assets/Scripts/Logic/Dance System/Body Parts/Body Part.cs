@@ -72,6 +72,8 @@ public class BodyPart : MonoBehaviour
 
     public virtual void ChangeState(StateDataSO state)
     {
+        Debug.Log($"Changing state to {state} ({state.Sprites[0].name}))");
+        
         _currentState = state.State;
         
         _spriteRenderer.transform.localPosition = _basePosition + state.Offset;
