@@ -11,6 +11,8 @@ public class DanceConfirm : MonoBehaviour
 
     [SerializeField] private ResultIcon _icon;
     
+    [SerializeField] private CombinationVisualization _combination;
+    
     private PlayerActions _playerActions;
     private CheckCombination _checker;
     private ScoreSystem _scoreSystem;
@@ -49,5 +51,7 @@ public class DanceConfirm : MonoBehaviour
         _scoreSystem.AddScore(resultType);
         _healthSystem.ChangeHealth(resultType);
         _emotions.PlayEmotion(resultType);
+        
+        _combination.CheckCombo(_scoreSystem.Combination);
     }
 }

@@ -13,6 +13,8 @@ public class ScoreSystem
     
     public event Action<CheckResultType> OnCheckResult;
     public event Action<float> OnScoreChanged;
+    
+    public int Combination => _combination;
 
     public ScoreSystem(CombinationSettingsSO settings)
     {

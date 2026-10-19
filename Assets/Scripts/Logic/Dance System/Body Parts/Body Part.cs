@@ -50,10 +50,11 @@ public class BodyPart : MonoBehaviour
         
         foreach (var bind in _bindings)
         {
-            Debug.Log($"Checking for state {bind.StateData.State}");
             if (bind.StateData.State == state)
             {
                 _currentState = state;
+                
+                Debug.Log($"Swap to {bind.StateData.Sprites[0].name}");
                 
                 if (_animator == null)
                 {
