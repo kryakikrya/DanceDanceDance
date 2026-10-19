@@ -1564,7 +1564,7 @@ MonoBehaviour:
   <AppPriority>k__BackingField: 1
   _appPanel: {fileID: 412079373}
   _menuPanel: {fileID: 489404247}
-  _isBlocked: 0
+  _isBlocked: 1
   _closeButton: {fileID: 2030772265}
   _fakeLoading: {fileID: 589095995}
   _app: {fileID: 1396964586}
@@ -9703,7 +9703,7 @@ MonoBehaviour:
   <AppPriority>k__BackingField: 3
   _appPanel: {fileID: 2096014689}
   _menuPanel: {fileID: 489404247}
-  _isBlocked: 0
+  _isBlocked: 1
   _closeButton: {fileID: 1135750186}
   _fakeLoading: {fileID: 589095995}
   _app: {fileID: 166875416}
@@ -24939,13 +24939,13 @@ MonoBehaviour:
   _rendererPrefab: {fileID: 3375487430927499057, guid: 5a6b07061dfe7ec93a643fcf100005a2, type: 3}
   _pages:
   - key: {fileID: -4118224150703101515, guid: f543df96f840f6ed39c34a5180acd6e9, type: 3}
-    value: {x: 5.5, y: 1}
+    value: {x: 5.5, y: 3}
   - key: {fileID: 8319113870352100757, guid: f543df96f840f6ed39c34a5180acd6e9, type: 3}
-    value: {x: 1, y: -0.4}
+    value: {x: 5.5, y: -1}
   - key: {fileID: 4740840894140157314, guid: f543df96f840f6ed39c34a5180acd6e9, type: 3}
-    value: {x: 0, y: 2.5}
+    value: {x: -3, y: 2.5}
   - key: {fileID: -6507630039383603085, guid: f543df96f840f6ed39c34a5180acd6e9, type: 3}
-    value: {x: -5.4, y: 1.6}
+    value: {x: 0.7, y: -1}
 --- !u!1 &2096099753
 GameObject:
   m_ObjectHideFlags: 0

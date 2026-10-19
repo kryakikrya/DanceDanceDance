@@ -41,5 +41,6 @@ public class ScoreSystem
     public void Reset()
     {
         _score = 0;
+        _combination = 0;
     }
 }

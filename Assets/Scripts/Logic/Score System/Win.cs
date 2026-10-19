@@ -58,7 +58,7 @@ public class Win : MonoBehaviour, IPrefLoader, IPrefSaver
             PlayerPrefs.SetFloat(PrefKey, totalScore);
             PlayerPrefs.Save();
 
-            _winPanel.SetActive(true);   
+            _winPanel.SetActive(true);
         }
     }
 
