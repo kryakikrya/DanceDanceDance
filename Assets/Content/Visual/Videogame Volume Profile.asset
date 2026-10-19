@@ -30,13 +30,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TVScanlinesVolume
   active: 1
   Intensity:
-    m_OverrideState: 0
-    m_Value: 0.35
+    m_OverrideState: 1
+    m_Value: 0.25
   LineThickness:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 2
   LineSpacing:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 2
 --- !u!114 &5192896299902149160
 MonoBehaviour:

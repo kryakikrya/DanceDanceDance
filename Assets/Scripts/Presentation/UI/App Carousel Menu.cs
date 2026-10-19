@@ -3,6 +3,8 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using Zenject;
 
 public class AppCarouselMenu : MonoBehaviour
 {
@@ -18,6 +20,11 @@ public class AppCarouselMenu : MonoBehaviour
     [SerializeField] private float _scrollSmoothTime = 0.12f;
     [SerializeField] private float _edgePullDistance = 28f;
     [SerializeField] private float _edgeReturnTime = 0.15f;
+    
+    [SerializeField] private string _swapAppSound;
+    [SerializeField] private string _appOpenSound;
+    [SerializeField] private string _appBlockedSound;
+    [SerializeField] private string _gameStartedSound;
 
     private int _selectedIndex;
     private float _contentVelocity;
@@ -28,9 +35,21 @@ public class AppCarouselMenu : MonoBehaviour
 
     public int SelectedIndex => _selectedIndex;
 
+    private SoundSystem _soundSystem;
+    
+    [Inject]
+    private void Construct(SoundSystem soundSystem)
+    {
+        _soundSystem = soundSystem;
+    }
+
     private void Awake()
     {
-        _orderedIcons = _icons.ToList();
+        _orderedIcons = _orderedIcons = _icons
+            .OrderBy(pair => pair.Value.AppPriority)
+            .ToList();
+        
+        _soundSystem.PlaySound(_appOpenSound);
 
         float firstY = (_orderedIcons.Count - 1) * _itemSpacing / 2f;
 
@@ -94,7 +113,15 @@ public class AppCarouselMenu : MonoBehaviour
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             _menuPanel.SetActive(false);
-            _orderedIcons[_selectedIndex].Value.Open();
+            if (_orderedIcons[_selectedIndex].Value.IsBlocked == false)
+            {
+                _orderedIcons[_selectedIndex].Value.Open();
+                _soundSystem.PlaySound(_appOpenSound);
+            }
+            else
+            {
+                _soundSystem.PlaySound(_appBlockedSound);
+            }
         }
 
         _edgeOffset = Mathf.SmoothDamp(
@@ -129,6 +156,16 @@ public class AppCarouselMenu : MonoBehaviour
 
     private void UpdateSelectedApp()
     {
-        _appName.text = _orderedIcons[_selectedIndex].Value.Name;
+        _soundSystem.PlaySound(_swapAppSound);
+
+        App app = _orderedIcons[_selectedIndex].Value;
+        _appName.text = app.IsBlocked ? $"{app.Name} [CLOSED]" : app.Name;
+
+        foreach (KeyValuePair<RectTransform, App> pair in _orderedIcons)
+        {
+            Image image = pair.Value.AppIcon;
+            image.color = pair.Value.IsBlocked ? Color.gray * 0.5f : Color.white;
+        }
+
     }
 }
