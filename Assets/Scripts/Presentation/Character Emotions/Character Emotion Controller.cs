@@ -5,8 +5,6 @@ using Zenject;
 
 public class CharacterEmotionController : BodyPart
 {
-    [SerializeField] private float _autoChangeFace = 3f;
-    
     [SerializeField] private float _faceBack = 1f;
     
     [SerializeField] private float _hpPercentForFoolishFace = 50;
@@ -76,6 +74,7 @@ public class CharacterEmotionController : BodyPart
             ChangeState(state);
             _soundSystem.PlaySound(_emotionSounds[state]);
             
+            StopAllCoroutines();
             StartCoroutine(FaceBack(_faceBack));
     }
     

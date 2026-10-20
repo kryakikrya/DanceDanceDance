@@ -27,6 +27,7 @@ public class App : MonoBehaviour
     public virtual void Open()
     {
         _appPanel.SetActive(true);
+        _menuPanel.SetActive(false);
         _closeButton.onClick.AddListener(Close);
         
         _fakeLoading.StartCoroutine(_fakeLoading.PlayLoading());

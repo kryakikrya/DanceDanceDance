@@ -1964,7 +1964,7 @@ MonoBehaviour:
   <AppPriority>k__BackingField: 4
   _appPanel: {fileID: 1374051036}
   _menuPanel: {fileID: 489404247}
-  _isBlocked: 1
+  _isBlocked: 0
   _closeButton: {fileID: 464021022}
   _fakeLoading: {fileID: 589095995}
   _app: {fileID: 1214295930}
@@ -10312,7 +10312,7 @@ MonoBehaviour:
   <AppPriority>k__BackingField: 3
   _appPanel: {fileID: 2096014689}
   _menuPanel: {fileID: 489404247}
-  _isBlocked: 1
+  _isBlocked: 0
   _closeButton: {fileID: 1135750186}
   _fakeLoading: {fileID: 589095995}
   _app: {fileID: 166875416}
@@ -15447,7 +15447,7 @@ MonoBehaviour:
   <AppPriority>k__BackingField: 5
   _appPanel: {fileID: 1374051036}
   _menuPanel: {fileID: 489404247}
-  _isBlocked: 1
+  _isBlocked: 0
   _closeButton: {fileID: 464021022}
   _fakeLoading: {fileID: 589095995}
   _app: {fileID: 521691353}
@@ -21303,7 +21303,6 @@ MonoBehaviour:
     StateData: {fileID: 11400000, guid: 6b08f3649d333feb2bd43bffa65df525, type: 2}
   - Action: {fileID: 0}
     StateData: {fileID: 11400000, guid: a08144b61a745e815bfa253b4311fe13, type: 2}
-  _autoChangeFace: 10
   _faceBack: 3
   _hpPercentForFoolishFace: 50
   _emotionSounds:

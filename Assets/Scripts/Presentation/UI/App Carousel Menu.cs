@@ -117,8 +117,6 @@ public class AppCarouselMenu : MonoBehaviour, IPrefLoader, IPrefSaver
 
         if (Mouse.current.rightButton.wasPressedThisFrame)
         {
-            _menuPanel.SetActive(false);
-
             if (_orderedIcons[_selectedIndex].Value.IsBlocked == false)
             {
                 _orderedIcons[_selectedIndex].Value.Open();
