@@ -33,6 +33,7 @@ public class TutorialController : MonoBehaviour
 
     public async void Tutorial()
     {
+        _text.text = "";
         _text.gameObject.SetActive(true);
         _songClock.SetIsPlaying(false);
         

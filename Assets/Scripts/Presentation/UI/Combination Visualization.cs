@@ -10,6 +10,7 @@ public class CombinationVisualization : MonoBehaviour
     [SerializeField] private int _minCombo;
     [SerializeField] private float _showDuration = 0.25f;
     [SerializeField] private float _hideDuration = 0.3f;
+    [SerializeField] private float _scale = 1.5f;
 
     private Sequence _animation;
 
@@ -41,7 +42,7 @@ public class CombinationVisualization : MonoBehaviour
         _comboText.alpha = 0;
 
         _animation = DOTween.Sequence()
-            .Append(_spriteRenderer.transform.DOScale(Vector3.one, _showDuration))
+            .Append(_spriteRenderer.transform.DOScale(_scale, _showDuration))
             .Join(_spriteRenderer.DOFade(1f, _showDuration * 0.3f))
             .Join(_comboText.DOFade(1f, _showDuration * 0.3f))
             .Join(_spriteRenderer.transform.DOLocalRotate(
