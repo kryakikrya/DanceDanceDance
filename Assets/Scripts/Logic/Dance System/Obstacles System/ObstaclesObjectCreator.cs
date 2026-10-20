@@ -100,6 +100,9 @@ public class ObstaclesObjectCreator : MonoBehaviour
         }
         
         _obstacles.Remove(id);
+        
+        _healthSystem.ChangeHealth(CheckResultType.TooLate);
+        
         obstacleObject.Item1.OnDestroy();
         obstacleObject.Item1.LifetimeEnded -= DeleteObstacle;
         obstacleObject.Item2.OnDestroy();

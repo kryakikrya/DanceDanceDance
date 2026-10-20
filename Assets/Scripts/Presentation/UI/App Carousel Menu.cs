@@ -115,7 +115,7 @@ public class AppCarouselMenu : MonoBehaviour, IPrefLoader, IPrefSaver
             }
         }
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Mouse.current.rightButton.wasPressedThisFrame)
         {
             _menuPanel.SetActive(false);
 
