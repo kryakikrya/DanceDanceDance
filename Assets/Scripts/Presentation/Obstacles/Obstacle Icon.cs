@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -79,6 +80,19 @@ public class ObstacleIcon : MonoBehaviour, IObstacleVisualization
 
         _animationCoroutine = null;
         LifetimeEnded?.Invoke(_id);
+    }
+    
+    public async UniTask AnimationAsync(
+        Vector2 playerPosition,
+        float duration)
+    {
+        Debug.Log("Animation Start");
+
+        _movementTween = transform.DOMove(playerPosition, duration)
+            .SetEase(Ease.Linear)
+            .OnComplete(() => Debug.Log("Obstacle reached player position"));
+
+        await _movementTween.AsyncWaitForCompletion();
     }
     
     public void OnDestroy()

@@ -35,11 +35,14 @@ public class SongClock : MonoBehaviour
         _songTimer = 0;
     }
 
-    public void SetIsPlaying(bool isPlaying, SongSO SO)
+    public void SetIsPlaying(bool isPlaying, SongSO SO = null)
     {
         Debug.Log($"Is playing is {isPlaying}");
 
-        _song = SO;
+        if (SO != null)
+        {
+            _song = SO;   
+        }
         
         _isPlaying = isPlaying;
     }

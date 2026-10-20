@@ -44,6 +44,13 @@ public class CheckCombination
       OnObstacleCreated?.Invoke(newObstacle);
    }
 
+   public void ChangeObstacleNoSpawn(Obstacle newObstacle)
+   {
+      _previousObstacle = _currentObstacle;
+      
+      _currentObstacle = newObstacle;
+   }
+
    private static readonly CheckResultType[] _timeResults =
    {
       CheckResultType.PerfectTime,
@@ -60,18 +67,25 @@ public class CheckCombination
       Dictionary<CheckResultType, float> timeWindows;
       CheckResultType outOfTimeResult;
 
-      if (Mathf.Abs(CurrentTime - _previousObstacle.Time) <
-          Mathf.Abs(CurrentTime - _currentObstacle.Time))
+      Debug.Log($"{_currentObstacle.Time} {_currentObstacle.BottomState}  {_previousObstacle.Time} {_previousObstacle.BottomState}");
+      
+
       {
-         obstacle = _previousObstacle;
-         timeWindows = _timeAfter;
-         outOfTimeResult = CheckResultType.TooLate;
-      }
-      else
-      {
-         obstacle = _currentObstacle;
-         timeWindows = _timeBefore;
-         outOfTimeResult = CheckResultType.TooEarly;
+         if (Mathf.Abs(CurrentTime - _previousObstacle.Time) <
+             Mathf.Abs(CurrentTime - _currentObstacle.Time) && _previousObstacle.Time != 0)
+         {
+            Debug.Log("PREVIOUS");
+            obstacle = _previousObstacle;
+            timeWindows = _timeAfter;
+            outOfTimeResult = CheckResultType.TooLate;
+         }
+         else
+         {
+            Debug.Log("CURRENT");
+            obstacle = _currentObstacle;
+            timeWindows = _timeBefore;
+            outOfTimeResult = CheckResultType.TooEarly;
+         }  
       }
 
       float timeDifference = Mathf.Abs(CurrentTime - obstacle.Time);
@@ -79,8 +93,12 @@ public class CheckCombination
 
       foreach (CheckResultType timeResult in _timeResults)
       {
+         Debug.Log($"Рассматриваю {timeResult}.");
+         Debug.Log($"{timeDifference} и {timeWindows[timeResult]}.");
+         
          if (timeDifference < timeWindows[timeResult])
          {
+            Debug.Log($"Да!");
             result = timeResult;
             break;
          }
@@ -102,7 +120,7 @@ public class CheckCombination
 
    public CheckResultType FinalizeCheck(Obstacle obstacle, CheckResultType type)
    {
-      Debug.Log($"Result {type}");
+      Debug.Log($"Result {type}. {obstacle.ID} {obstacle.Time} {obstacle.TopState} {obstacle.BottomState}");
       OnObstacleDestroyed?.Invoke(obstacle);
       return type;
    }

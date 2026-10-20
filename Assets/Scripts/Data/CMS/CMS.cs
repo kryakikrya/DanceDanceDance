@@ -17,7 +17,6 @@ public class CMS
 
         if (loaded != null)
         {
-            Debug.Log($"Entity was found ({additionalFolder + id})");
             return loaded;
         }
         else
@@ -27,7 +26,6 @@ public class CMS
                 return null;
             }
             
-            Debug.LogWarning($"Entity not found ({additionalFolder + id})");
             return null;
         }
     }

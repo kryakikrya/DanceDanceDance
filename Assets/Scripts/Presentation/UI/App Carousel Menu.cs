@@ -172,15 +172,6 @@ public class AppCarouselMenu : MonoBehaviour, IPrefLoader, IPrefSaver
         }
     }
 
-    public string GetSaveData()
-    {
-        EnsureOrderedIcons();
-
-        return new string(_orderedIcons
-            .Select(pair => pair.Value.IsBlocked ? '0' : '1')
-            .ToArray());
-    }
-
     public void LoadData(string data)
     {
         EnsureOrderedIcons();
@@ -191,6 +182,8 @@ public class AppCarouselMenu : MonoBehaviour, IPrefLoader, IPrefSaver
         }
 
         _isLoadingBlockingInfo = true;
+        
+        Debug.Log($"Loading {data}");
 
         for (int i = 0; i < _orderedIcons.Count && i < data.Length; i++)
         {
@@ -210,6 +203,24 @@ public class AppCarouselMenu : MonoBehaviour, IPrefLoader, IPrefSaver
         UpdateSelectedApp(false);
     }
 
+    public string GetSaveData()
+    {
+        EnsureOrderedIcons();
+
+        return PlayerPrefs.GetString(PrefKey, new string(_orderedIcons
+            .Select(pair => pair.Value.IsBlocked ? '0' : '1')
+            .ToArray()));
+    }
+
+    private void SaveBlockingInfo()
+    {
+        PlayerPrefs.SetString(PrefKey, new string(_orderedIcons
+            .Select(pair => pair.Value.IsBlocked ? '0' : '1')
+            .ToArray()));
+
+        PlayerPrefs.Save();
+    }
+
     private void OnBlockingStateChanged()
     {
         if (_isLoadingBlockingInfo)
@@ -217,8 +228,9 @@ public class AppCarouselMenu : MonoBehaviour, IPrefLoader, IPrefSaver
             return;
         }
 
-        PlayerPrefs.SetString(PrefKey, GetSaveData());
-        PlayerPrefs.Save();
+        SaveBlockingInfo();
+
+        Debug.Log($"Blocking {GetSaveData()}");
 
         UpdateSelectedApp(false);
     }

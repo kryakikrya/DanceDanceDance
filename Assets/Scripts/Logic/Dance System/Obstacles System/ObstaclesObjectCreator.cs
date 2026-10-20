@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -30,10 +32,14 @@ public class ObstaclesObjectCreator : MonoBehaviour
 
     public float ObstacleFlyTime => _duration;
 
+    private SongClock _clock;
+
     [Inject]
-    private void Construct(CheckCombination combinations)
+    private void Construct(CheckCombination combinations, SongClock clock)
     {
         _checkCombination = combinations;
+
+        _clock = clock;
     }
 
     private void OnEnable()
@@ -64,7 +70,7 @@ public class ObstaclesObjectCreator : MonoBehaviour
 
     private void CreateObstacle(Obstacle obstacle)
     {
-        Debug.Log($"Добавляю Obstacle {obstacle.ID}");
+        Debug.Log($"Добавляю Obstacle {obstacle.ID} {obstacle.Time} {obstacle.BottomState} {obstacle.TopState}");
         
         VisualizedObstacle newObstacle = Instantiate(_obstaclePrefab, _spawnPosition, Quaternion.identity);
         newObstacle.Top.ChangeState(obstacle, true);
@@ -80,14 +86,56 @@ public class ObstaclesObjectCreator : MonoBehaviour
         _obstacles.Add(obstacle.ID, (newObstacle, icon));
     }
 
+    public (VisualizedObstacle, ObstacleIcon) CreateObstacle(Obstacle obstacle, float duration)
+    {
+        Debug.Log($"Добавляю Obstacle {obstacle.ID} {obstacle.Time} {obstacle.BottomState} {obstacle.TopState}");
+        
+        VisualizedObstacle newObstacle = Instantiate(_obstaclePrefab, _spawnPosition, Quaternion.identity);
+        newObstacle.Top.ChangeState(obstacle, true);
+        newObstacle.Bottom.ChangeState(obstacle, false);
+        
+        Alternative(newObstacle, obstacle);
+        
+        ObstacleIcon icon = Instantiate(_obstacleIconPrefab, _iconStartPosition, Quaternion.identity);
+        icon.ChangeIcon(_iconsSO.GetIcon(new DancePair {Top = obstacle.TopState, Bottom = obstacle.BottomState}));
+        
+        Alternative(icon, obstacle);
+        
+        _obstacles.Add(obstacle.ID, (newObstacle, icon));
+        
+        return (newObstacle, icon);
+    }
+
     private void AddVisualization(IObstacleVisualization newObstacle, Obstacle obstacle, Vector2 pos1, Vector2 pos2)
     {
         Debug.Log($"Visualized Obstacle {newObstacle}");
+
+        if (obstacle.Time < _duration)
+        {
+            newObstacle.Animate(pos1, pos2, _checkCombination.TimeAfter[CheckResultType.BadTime], obstacle.Time);
+        }
+        else
+        {
+            newObstacle.Animate(pos1, pos2, _checkCombination.TimeAfter[CheckResultType.BadTime], _duration);
+        }
         
-        newObstacle.Animate(pos1, pos2, _checkCombination.TimeAfter[CheckResultType.BadTime], _duration);
-        newObstacle.SetID(obstacle.ID);
-        
-        newObstacle.LifetimeEnded += DeleteObstacle;
+        newObstacle.SetID(obstacle.ID);   
+        newObstacle.LifetimeEnded += DeleteAndDamage;
+    }
+    
+    private void Alternative(IObstacleVisualization newObstacle, Obstacle obstacle)
+    {
+        Debug.Log($"Visualized Obstacle {newObstacle}");
+
+        newObstacle.SetID(obstacle.ID);   
+        newObstacle.LifetimeEnded += DeleteAndDamage;
+    }
+
+    private void DeleteAndDamage(int id)
+    {
+        Debug.Log("Delete and damage");
+        _healthSystem.ChangeHealth(CheckResultType.TooLate);
+        DeleteObstacle(id);
     }
 
     private void DeleteObstacle(int id)
@@ -101,12 +149,10 @@ public class ObstaclesObjectCreator : MonoBehaviour
         
         _obstacles.Remove(id);
         
-        _healthSystem.ChangeHealth(CheckResultType.TooLate);
-        
         obstacleObject.Item1.OnDestroy();
-        obstacleObject.Item1.LifetimeEnded -= DeleteObstacle;
+        obstacleObject.Item1.LifetimeEnded -= DeleteAndDamage;
         obstacleObject.Item2.OnDestroy();
-        obstacleObject.Item2.LifetimeEnded -= DeleteObstacle;
+        obstacleObject.Item2.LifetimeEnded -= DeleteAndDamage;
     }
     
     private void DeleteObstacle(Obstacle obstacle)
@@ -122,11 +168,9 @@ public class ObstaclesObjectCreator : MonoBehaviour
         
         _obstacles.Remove(id);
         
-        _healthSystem.ChangeHealth(CheckResultType.TooLate);
-        
-        obstacleObject.Item1.LifetimeEnded -= DeleteObstacle;
+        obstacleObject.Item1.LifetimeEnded -= DeleteAndDamage;
         obstacleObject.Item1.OnDestroy();
-        obstacleObject.Item2.LifetimeEnded -= DeleteObstacle;
+        obstacleObject.Item2.LifetimeEnded -= DeleteAndDamage;
         obstacleObject.Item2.OnDestroy();
     }
 
@@ -134,9 +178,9 @@ public class ObstaclesObjectCreator : MonoBehaviour
     {
         foreach (KeyValuePair<int, (IObstacleVisualization, IObstacleVisualization)> obstacle in _obstacles)
         {
-            obstacle.Value.Item1.LifetimeEnded -= DeleteObstacle;
+            obstacle.Value.Item1.LifetimeEnded -= DeleteAndDamage;
             obstacle.Value.Item1.OnDestroy();
-            obstacle.Value.Item2.LifetimeEnded  -= DeleteObstacle;
+            obstacle.Value.Item2.LifetimeEnded  -= DeleteAndDamage;
             obstacle.Value.Item2.OnDestroy();
         }
         

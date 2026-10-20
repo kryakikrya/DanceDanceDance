@@ -51,8 +51,8 @@ public class DanceConfirm : MonoBehaviour
         _scoreSystem.AddScore(resultType);
         _emotions.PlayEmotion(resultType);
         
-        _combination.CheckCombo(_scoreSystem.Combination);
-        
         _healthSystem.ChangeHealth(resultType);
+        
+        _combination.CheckCombo(_scoreSystem.Combination);
     }
 }

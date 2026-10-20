@@ -50,6 +50,8 @@ public class ObstacleGeneration
                 float obstacleTime = GetTimeOfBeat(index);
                 float creationTime = obstacleTime - _obstaclesObjectCreator.ObstacleFlyTime;
 
+                Debug.Log($"Obstacle {index}: {obstacleTime} - {creationTime}");
+                
                 await UniTask.WaitUntil(
                     () => _clock.HasReached(creationTime),
                     cancellationToken: _cts.Token
@@ -77,6 +79,8 @@ public class ObstacleGeneration
 
     private void CreateObstacle(int index, float time)
     {
+        Debug.Log($"Obstacle {index}: {time}. Сейчас {_clock.SongTime}");
+        
         DanceState topState;
         DanceState bottomState;
         
@@ -97,6 +101,11 @@ public class ObstacleGeneration
 
         _last = (topState, bottomState);
         OnObstacleCreated?.Invoke(new Obstacle(index, topState, bottomState, time));
+    }
+    
+    public void CreateObstacle(int index, float time, DanceState top, DanceState bottom)
+    {
+        OnObstacleCreated?.Invoke(new Obstacle(index, top, bottom, time));
     }
     
     public void Stop()

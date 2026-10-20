@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -101,6 +102,39 @@ public class VisualizedObstacle : MonoBehaviour, IObstacleVisualization
         _animationCoroutine = null;
 
         LifetimeEnded?.Invoke(_id);
+    }
+    
+    public async UniTask AnimationAsync(
+        Vector2 spawnPosition,
+        Vector2 playerPosition,
+        float duration)
+    {
+        transform.position = spawnPosition;
+        transform.localScale = Vector3.one * _sizeFrom;
+
+        float initialAlpha = _spriteRenderer.color.a;
+
+        _spriteRenderer.color = new Color(
+            _spriteRenderer.color.r,
+            _spriteRenderer.color.g,
+            _spriteRenderer.color.b,
+            0f
+        );
+
+        _spriteRenderer2.color = new Color(
+            _spriteRenderer2.color.r,
+            _spriteRenderer2.color.g,
+            _spriteRenderer2.color.b,
+            0f
+        );
+
+        _spriteRenderer.DOFade(initialAlpha, 0.5f).SetEase(Ease.Linear);
+        _spriteRenderer2.DOFade(initialAlpha, 0.5f).SetEase(Ease.Linear);
+
+        _movementTween = transform.DOMove(playerPosition, duration).SetEase(Ease.Linear);
+        _scaleTween = transform.DOScale(_sizeTo, duration).SetEase(Ease.Linear);
+
+        await _movementTween.AsyncWaitForCompletion();
     }
 
     public void OnDestroy()
