@@ -37,6 +37,8 @@ public class CheckCombination
 
    public void ChangeSettings(Dictionary<CheckResultType, float> before, Dictionary<CheckResultType, float> after)
    {
+      Debug.Log($"Changed {before[CheckResultType.PerfectTime]}");
+      
       _timeBefore = before;
       
       _timeAfter = after;

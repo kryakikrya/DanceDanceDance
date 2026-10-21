@@ -65,7 +65,6 @@ public class GameLevelApp : App
             _obstaclesObjectCreator.ChangeFlyTime(_hardTime);
             _entry.StartGame(_startSong, _startSongSOHard);
             _checkCombination.ChangeSettings(_typeToBeforeTimeHard, _typeToAfterTimeHard);
-            _checkCombination.ChangeSettings(_typeToBeforeTimeEasy, _typeToAfterTimeEasy);
         }
         else
         {
