@@ -35,6 +35,13 @@ public class CheckCombination
       _songClock = clock;
    }
 
+   public void ChangeSettings(Dictionary<CheckResultType, float> before, Dictionary<CheckResultType, float> after)
+   {
+      _timeBefore = before;
+      
+      _timeAfter = after;
+   }
+
    private void ChangeObstacle(Obstacle newObstacle)
    {
       _previousObstacle = _currentObstacle;

@@ -16,13 +16,13 @@ MonoBehaviour:
   - key: 1
     value: 50
   - key: 0
-    value: -15
+    value: -20
   - key: 2
     value: 25
   - key: 6
-    value: -7
+    value: -20
   - key: 5
-    value: -15
+    value: -25
   - key: 4
     value: 5
   - key: 3

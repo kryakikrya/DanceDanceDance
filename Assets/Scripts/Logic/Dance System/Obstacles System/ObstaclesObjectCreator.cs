@@ -68,6 +68,11 @@ public class ObstaclesObjectCreator : MonoBehaviour
         DeleteAll();
     }
 
+    public void ChangeFlyTime(float time)
+    {
+        _duration =  time;
+    }
+
     private void CreateObstacle(Obstacle obstacle)
     {
         Debug.Log($"Добавляю Obstacle {obstacle.ID} {obstacle.Time} {obstacle.BottomState} {obstacle.TopState}");

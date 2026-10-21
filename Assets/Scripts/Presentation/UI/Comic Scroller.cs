@@ -8,18 +8,21 @@ public class ComicScroller : MonoBehaviour
     [SerializeField] private SpriteRenderer _rendererPrefab;
     [SerializeField] private Dictionary<Sprite, Vector2> _pages;
 
+    [SerializeField] private GameObject _button;
+
     private List<KeyValuePair<Sprite, Vector2>> _orderedPages;
     private int _currentIndex = -1;
 
     private void Start()
     {
+        _button.SetActive(false);
         _orderedPages = _pages.ToList();
         SpawnNextPage();
     }
 
     private void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame == false)
+        if (Keyboard.current.anyKey.wasPressedThisFrame == false && Mouse.current.leftButton.wasPressedThisFrame == false)
         {
             return;
         }
@@ -31,6 +34,7 @@ public class ComicScroller : MonoBehaviour
     {
         if (_currentIndex >= _orderedPages.Count - 1)
         {
+            _button.SetActive(true);
             return;
         }
 

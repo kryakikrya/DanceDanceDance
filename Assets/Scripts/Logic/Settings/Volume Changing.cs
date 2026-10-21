@@ -48,7 +48,7 @@ public class VolumeChanging : MonoBehaviour, IPrefLoader, IPrefSaver, IPointerUp
 
     private void ChangeVolume(float value)
     {
-        float volume = value > 0f ? Mathf.Log10(value) * 20f : -80f;
+        float volume = value > 0f ? Mathf.Log10(value) * 20f + 60f : -80f;
         _mixerGroup.audioMixer.SetFloat(_volumeParameter, volume);
 
         PlayerPrefs.SetFloat(PrefKey, value);
@@ -91,7 +91,7 @@ public class VolumeChanging : MonoBehaviour, IPrefLoader, IPrefSaver, IPointerUp
         float volume = float.Parse(data, CultureInfo.InvariantCulture);
 
         PlayerPrefs.SetFloat(PrefKey, volume);
-        _slider.value = volume;
+        _slider.SetValueWithoutNotify(volume);
         ChangeVolume(volume);
         PlayerPrefs.Save();
 

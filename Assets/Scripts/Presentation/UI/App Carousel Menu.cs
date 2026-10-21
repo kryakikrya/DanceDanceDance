@@ -119,6 +119,28 @@ public class AppCarouselMenu : MonoBehaviour, IPrefLoader, IPrefSaver
         {
             if (_orderedIcons[_selectedIndex].Value.IsBlocked == false)
             {
+                if (_orderedIcons[_selectedIndex].Value.TryGetComponent(out GameLevelApp game))
+                {
+                    game.ChangeDifficulty(false);
+                }
+                
+                _orderedIcons[_selectedIndex].Value.Open();
+                _soundSystem.PlaySound(_appOpenSound);
+            }
+            else
+            {
+                _soundSystem.PlaySound(_appBlockedSound);
+            }
+        }
+        else if (Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            if (_orderedIcons[_selectedIndex].Value.IsBlocked == false)
+            {
+                if (_orderedIcons[_selectedIndex].Value.TryGetComponent(out GameLevelApp game))
+                {
+                    game.ChangeDifficulty(true);
+                }
+                
                 _orderedIcons[_selectedIndex].Value.Open();
                 _soundSystem.PlaySound(_appOpenSound);
             }
@@ -249,6 +271,11 @@ public class AppCarouselMenu : MonoBehaviour, IPrefLoader, IPrefSaver
 
         App app = _orderedIcons[_selectedIndex].Value;
         _appName.text = app.IsBlocked ? $"{app.Name} [CLOSED]" : app.Name;
+
+        if (app is GameLevelApp)
+        {
+            _appName.text = _appName.text + " RMB - Easy. ENTER - Hard";
+        }
 
         foreach (KeyValuePair<RectTransform, App> pair in _orderedIcons)
         {

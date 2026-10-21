@@ -1964,12 +1964,52 @@ MonoBehaviour:
   <AppPriority>k__BackingField: 4
   _appPanel: {fileID: 1374051036}
   _menuPanel: {fileID: 489404247}
-  _isBlocked: 0
+  _isBlocked: 1
   _closeButton: {fileID: 464021022}
   _fakeLoading: {fileID: 589095995}
   _app: {fileID: 1214295930}
   _startSong: {fileID: 8300000, guid: 9d7c494e5049217a691f4679912e2429, type: 3}
   _startSongSO: {fileID: 11400000, guid: abfa92e9322dbe55d8fd557bb99b188a, type: 2}
+  _startSongSOHard: {fileID: 11400000, guid: eb1a9d24833d95bc18acf68ec6a1e7a2, type: 2}
+  _obstaclesObjectCreator: {fileID: 743371136}
+  _easyTime: 6.5
+  _hardTime: 3
+  _typeToBeforeTimeEasy:
+  - key: 1
+    value: 0.2
+  - key: 3
+    value: 0.6
+  - key: 2
+    value: 0.5
+  - key: 4
+    value: 0.7
+  _typeToAfterTimeEasy:
+  - key: 1
+    value: 0.2
+  - key: 3
+    value: 0.6
+  - key: 2
+    value: 0.5
+  - key: 4
+    value: 0.7
+  _typeToBeforeTimeHard:
+  - key: 1
+    value: 0.05
+  - key: 2
+    value: 0.1
+  - key: 3
+    value: 0.2
+  - key: 4
+    value: 0.25
+  _typeToAfterTimeHard:
+  - key: 1
+    value: 0.05
+  - key: 2
+    value: 0.1
+  - key: 3
+    value: 0.2
+  - key: 4
+    value: 0.25
   _newSprite: {fileID: 379629273358954660, guid: 065281754872990a0b96b96537b833eb, type: 3}
   _spriteRenderer: {fileID: 1165535352}
 --- !u!1 &187756182
@@ -3489,6 +3529,46 @@ MonoBehaviour:
   _app: {fileID: 132471279}
   _startSong: {fileID: 8300000, guid: 948006c1ce548f6cd96dccf607419f40, type: 3}
   _startSongSO: {fileID: 11400000, guid: a779e5c6cd13ee83d97d31346832e9e3, type: 2}
+  _startSongSOHard: {fileID: 11400000, guid: 2a992dbe97a2a2180bc4a262c3fe3e19, type: 2}
+  _obstaclesObjectCreator: {fileID: 743371136}
+  _easyTime: 6.5
+  _hardTime: 4
+  _typeToBeforeTimeEasy:
+  - key: 1
+    value: 0.2
+  - key: 2
+    value: 0.5
+  - key: 3
+    value: 0.6
+  - key: 4
+    value: 0.7
+  _typeToAfterTimeEasy:
+  - key: 1
+    value: 0.2
+  - key: 3
+    value: 0.6
+  - key: 2
+    value: 0.5
+  - key: 4
+    value: 0.7
+  _typeToBeforeTimeHard:
+  - key: 1
+    value: 0.05
+  - key: 2
+    value: 0.1
+  - key: 3
+    value: 0.2
+  - key: 4
+    value: 0.4
+  _typeToAfterTimeHard:
+  - key: 1
+    value: 0.05
+  - key: 2
+    value: 0.1
+  - key: 3
+    value: 0.2
+  - key: 4
+    value: 0.4
 --- !u!1 &286265679
 GameObject:
   m_ObjectHideFlags: 0
@@ -3916,7 +3996,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -346.70663, w: 0}
+  m_margin: {x: 0, y: 0, z: -676.5385, w: -25.686718}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4613,6 +4693,7 @@ MonoBehaviour:
     value: {x: -2, y: -2.5}
   - key: {fileID: 4106342632466915317, guid: 4bf028a57e2ab719b85eafec8affec63, type: 3}
     value: {x: 4.6, y: -3.3}
+  _button: {fileID: 2030772263}
 --- !u!1 &425883619
 GameObject:
   m_ObjectHideFlags: 0
@@ -6366,6 +6447,46 @@ MonoBehaviour:
   _app: {fileID: 0}
   _startSong: {fileID: 8300000, guid: 7c18d8c3822d9e09d963ec1c1a15d741, type: 3}
   _startSongSO: {fileID: 11400000, guid: baa1f9da52a8db238bfb2bf211197614, type: 2}
+  _startSongSOHard: {fileID: 11400000, guid: dd1694b915c03e8d4a81aeb8d778e7b0, type: 2}
+  _obstaclesObjectCreator: {fileID: 743371136}
+  _easyTime: 6.5
+  _hardTime: 2.7
+  _typeToBeforeTimeEasy:
+  - key: 1
+    value: 0.2
+  - key: 3
+    value: 0.6
+  - key: 2
+    value: 0.5
+  - key: 4
+    value: 0.7
+  _typeToAfterTimeEasy:
+  - key: 1
+    value: 0.2
+  - key: 3
+    value: 0.6
+  - key: 2
+    value: 0.5
+  - key: 4
+    value: 0.7
+  _typeToBeforeTimeHard:
+  - key: 1
+    value: 0.05
+  - key: 2
+    value: 0.1
+  - key: 3
+    value: 0.15
+  - key: 4
+    value: 0.2
+  _typeToAfterTimeHard:
+  - key: 1
+    value: 0.05
+  - key: 2
+    value: 0.1
+  - key: 3
+    value: 0.15
+  - key: 4
+    value: 0.2
   _newSprite: {fileID: -8859194725478956703, guid: 9d63d5452d3eaef3685936d05c8b8688, type: 3}
   _spriteRenderer: {fileID: 1165535352}
 --- !u!114 &521691354
@@ -8800,7 +8921,6 @@ GameObject:
   - component: {fileID: 707019711}
   - component: {fileID: 707019713}
   - component: {fileID: 707019712}
-  - component: {fileID: 707019714}
   m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -8927,19 +9047,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707019710}
   m_CullTransparentMesh: 1
---- !u!114 &707019714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 707019710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90607d2c361de4e328d478a22d0f75a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DestroySelf
-  _destroyDelay: 20
 --- !u!1 &714930291
 GameObject:
   m_ObjectHideFlags: 0
@@ -9970,7 +10077,7 @@ MonoBehaviour:
   _iconEndPosition: {x: 4, y: -3}
   _obstaclePrefab: {fileID: 4123955064399738406, guid: 872f5f774ac4e0947933195f45cf48cd, type: 3}
   _obstacleIconPrefab: {fileID: -178525855939466920, guid: 3df98b72e6d120a2fa40f61b3f71a44e, type: 3}
-  _duration: 7
+  _duration: 5.5
   _iconsSO: {fileID: 11400000, guid: 9a2e40969c0cbe236be5c54546a4ef79, type: 2}
 --- !u!1 &751282191
 GameObject:
@@ -10313,7 +10420,7 @@ MonoBehaviour:
   <AppPriority>k__BackingField: 3
   _appPanel: {fileID: 2096014689}
   _menuPanel: {fileID: 489404247}
-  _isBlocked: 0
+  _isBlocked: 1
   _closeButton: {fileID: 1135750186}
   _fakeLoading: {fileID: 589095995}
   _app: {fileID: 166875416}
@@ -14620,7 +14727,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.48197767
+  m_Volume: 0.8314769
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -15167,7 +15274,7 @@ MonoBehaviour:
     value: 0.2
   - key: 3
     value: 0.5
-  _startHours: 11
+  _startHours: 12
   _startMinutes: 0
   _battery:
   - {fileID: 1013493715}
@@ -15448,12 +15555,52 @@ MonoBehaviour:
   <AppPriority>k__BackingField: 5
   _appPanel: {fileID: 1374051036}
   _menuPanel: {fileID: 489404247}
-  _isBlocked: 0
+  _isBlocked: 1
   _closeButton: {fileID: 464021022}
   _fakeLoading: {fileID: 589095995}
   _app: {fileID: 521691353}
   _startSong: {fileID: 8300000, guid: ac7c4d7bbd7c8d233bd066f75d7db7ae, type: 3}
   _startSongSO: {fileID: 11400000, guid: 4ddd6caeecb4ddf95b76e0c4ac53f792, type: 2}
+  _startSongSOHard: {fileID: 11400000, guid: 08b2a18a702fa8b509d7b1d9b576f7fa, type: 2}
+  _obstaclesObjectCreator: {fileID: 743371136}
+  _easyTime: 6.5
+  _hardTime: 3
+  _typeToBeforeTimeEasy:
+  - key: 1
+    value: 0.2
+  - key: 3
+    value: 0.6
+  - key: 2
+    value: 0.5
+  - key: 4
+    value: 0.7
+  _typeToAfterTimeEasy:
+  - key: 1
+    value: 0.2
+  - key: 3
+    value: 0.6
+  - key: 2
+    value: 0.5
+  - key: 4
+    value: 0.7
+  _typeToBeforeTimeHard:
+  - key: 1
+    value: 0.05
+  - key: 2
+    value: 0.1
+  - key: 3
+    value: 0.2
+  - key: 4
+    value: 0.25
+  _typeToAfterTimeHard:
+  - key: 1
+    value: 0.05
+  - key: 2
+    value: 0.1
+  - key: 3
+    value: 0.2
+  - key: 4
+    value: 0.25
 --- !u!114 &1214295931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15599,7 +15746,7 @@ MonoBehaviour:
   _mixerGroup: {fileID: -5669990881173632892, guid: 092cdd14f1030e565a95b0c102dd4348, type: 2}
   _volumeParameter: MusicVolume
   _sound: {fileID: 8300000, guid: 74647e5e6f3318de7a6e4b61ab3483cc, type: 3}
-  _isMusic: 0
+  _isMusic: 1
 --- !u!1 &1235572806
 GameObject:
   m_ObjectHideFlags: 0
@@ -16113,7 +16260,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5180223
+  m_Volume: 0.16852307
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -17330,6 +17477,46 @@ MonoBehaviour:
   _app: {fileID: 787416506}
   _startSong: {fileID: 8300000, guid: a8fd821f14eebb1c08e374de859fe7a9, type: 3}
   _startSongSO: {fileID: 11400000, guid: b6c2ad072c1c67cfeb267b90485dca58, type: 2}
+  _startSongSOHard: {fileID: 11400000, guid: 6e2192ec593416697b0758e9d6acee89, type: 2}
+  _obstaclesObjectCreator: {fileID: 743371136}
+  _easyTime: 6.5
+  _hardTime: 3.5
+  _typeToBeforeTimeEasy:
+  - key: 1
+    value: 0.2
+  - key: 3
+    value: 0.6
+  - key: 2
+    value: 0.5
+  - key: 4
+    value: 0.7
+  _typeToAfterTimeEasy:
+  - key: 1
+    value: 0.2
+  - key: 3
+    value: 0.6
+  - key: 2
+    value: 0.5
+  - key: 4
+    value: 0.7
+  _typeToBeforeTimeHard:
+  - key: 1
+    value: 0.05
+  - key: 2
+    value: 0.1
+  - key: 3
+    value: 0.2
+  - key: 4
+    value: 0.3
+  _typeToAfterTimeHard:
+  - key: 1
+    value: 0.05
+  - key: 2
+    value: 0.1
+  - key: 3
+    value: 0.2
+  - key: 4
+    value: 0.3
   _newSprite: {fileID: -8859194725478956703, guid: 9d63d5452d3eaef3685936d05c8b8688, type: 3}
   _spriteRenderer: {fileID: 1165535352}
 --- !u!114 &1396964587
@@ -18593,7 +18780,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: E
+  m_text: S
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -20793,7 +20980,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: E
+  m_text: D
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -26477,6 +26664,7 @@ MonoBehaviour:
     value: {x: -3, y: 2.5}
   - key: {fileID: -6507630039383603085, guid: f543df96f840f6ed39c34a5180acd6e9, type: 3}
     value: {x: 0.7, y: -1}
+  _button: {fileID: 1135750184}
 --- !u!1 &2096099753
 GameObject:
   m_ObjectHideFlags: 0
@@ -26673,7 +26861,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: E
+  m_text: A
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
