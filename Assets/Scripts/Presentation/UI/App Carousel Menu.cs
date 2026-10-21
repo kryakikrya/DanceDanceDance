@@ -274,7 +274,7 @@ public class AppCarouselMenu : MonoBehaviour, IPrefLoader, IPrefSaver
 
         if (app is GameLevelApp)
         {
-            _appName.text = _appName.text + " RMB - Easy. ENTER - Hard";
+            _appName.text = _appName.text + "\nRMB - Easy. ENTER - Hard";
         }
 
         foreach (KeyValuePair<RectTransform, App> pair in _orderedIcons)
